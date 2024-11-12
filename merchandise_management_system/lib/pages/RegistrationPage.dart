@@ -37,7 +37,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController address = TextEditingController();
 
   final TextEditingController dob = TextEditingController()
-    ..text = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    ..text = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   final RadioGroupController genderController = RadioGroupController();
 
