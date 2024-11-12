@@ -80,6 +80,7 @@ flutter:
 
   assets:
     - assets/mms_logo.png
+    - assets/reg_back.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

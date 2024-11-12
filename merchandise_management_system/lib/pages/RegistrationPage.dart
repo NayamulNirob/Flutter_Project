@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_web/image_picker_web.dart';
@@ -37,7 +36,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController address = TextEditingController();
 
   final TextEditingController dob = TextEditingController()
-    ..text = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    ..text = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   final RadioGroupController genderController = RadioGroupController();
 
@@ -133,177 +132,163 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Center(
-              child: Text(
-                "Registration",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/reg_back.png',
+              fit: BoxFit.cover,
             ),
-            const SizedBox(
-              height: 10,
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.3),  // Adds a dark overlay
             ),
-            TextField(
-              controller: name,
-              decoration: const InputDecoration(
-                labelText: "Name",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.person),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              controller: email,
-              decoration: const InputDecoration(
-                labelText: "Email",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.email),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              controller: password,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.password),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              controller: confirmPassword,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Confirm Password",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.password),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              controller: cell,
-              decoration: const InputDecoration(
-                labelText: "Cell Number",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.phone),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              controller: address,
-              decoration: const InputDecoration(
-                labelText: "Address",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.location_city),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              onTap: () async {
-                final DateTime? picked = await showDatePicker(
-                  context: context,
-                  initialDate: selectedDate ?? DateTime.now(),
-                  firstDate: DateTime(1900),
-                  lastDate: DateTime(2101),
-                );
-                if (picked != null && picked != selectedDate) {
-                  setState(() {
-                    selectedDate = picked;
-                    String formattedDate =
-                    DateFormat('yyyy-MM-dd').format(selectedDate!);
-                    dob.text = formattedDate;
-                  });
-                }
-              },
-              controller: dob,
-              decoration: const InputDecoration(
-                labelText: "Date of Birth",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.calendar_today),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text("Gender"),
-            const SizedBox(
-              height: 10,
-            ),
-            RadioGroup(
-              controller: genderController,
-              values: const ["Male", "Female", "Others"],
-              indexOfDefault: 0,
-              orientation: RadioGroupOrientation.horizontal,
-              decoration: RadioGroupDecoration(
-                spacing: 10.0,
-                labelStyle: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                ),
-                activeColor: Colors.blue,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.image),
-              label: const Text('Pick Image'),
-              onPressed: pickImage,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () async {
-                bool isRegistered = await submitRegistration();
-                if (isRegistered) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
-                } else {
-                  // Show an error message or handle unsuccessful registration as needed.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Registration failed. Please try again.')),
-                  );
-                }
-              },
-              child: const Text(
-                'Registration',
-                style: TextStyle(
-                  color: Colors.white,
-                  decoration: TextDecoration.none,
+          ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                color: Colors.white.withOpacity(0.9),  // Slightly transparent card
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                elevation: 10,
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Center(
+                        child: Text(
+                          "Create Your Account",
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      buildTextField(controller: name, label: "Name", icon: Icons.person),
+                      buildTextField(controller: email, label: "Email", icon: Icons.email),
+                      buildTextField(controller: password, label: "Password", icon: Icons.lock, obscureText: true),
+                      buildTextField(controller: confirmPassword, label: "Confirm Password", icon: Icons.lock, obscureText: true),
+                      buildTextField(controller: cell, label: "Cell Number", icon: Icons.phone),
+                      buildTextField(controller: address, label: "Address", icon: Icons.location_city),
+                      buildDateField(),
+                      const SizedBox(height: 10),
+                      const Text("Gender", style: TextStyle(fontSize: 16, color: Colors.blueAccent)),
+                      RadioGroup(
+                        controller: genderController,
+                        values: const ["Male", "Female", "Others"],
+                        indexOfDefault: 0,
+                        orientation: RadioGroupOrientation.horizontal,
+                        decoration: const RadioGroupDecoration(
+                          spacing: 20.0,
+                          activeColor: Colors.blueAccent,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton.icon(
+                        icon: const Icon(Icons.image),
+                        label: const Text('Upload Profile Picture'),
+                        onPressed: pickImage,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                        onPressed: () async {
+                          bool isRegistered = await submitRegistration();
+                          if (isRegistered) {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Registration failed. Please try again.')),
+                            );
+                          }
+                        },
+                        child: const Text('Register', style: TextStyle(fontSize: 18)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
 
-
-          ],
+  Widget buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool obscureText = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.8),
+          labelText: label,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          prefixIcon: Icon(icon, color: Colors.blueAccent),
+          labelStyle: const TextStyle(color: Colors.blueGrey),
         ),
       ),
     );
   }
+
+  Widget buildDateField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        onTap: () async {
+          final DateTime? picked = await showDatePicker(
+            context: context,
+            initialDate: selectedDate ?? DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2101),
+          );
+          if (picked != null && picked != selectedDate) {
+            setState(() {
+              selectedDate = picked;
+              dob.text = DateFormat('yyyy-MM-dd').format(selectedDate!);
+            });
+          }
+        },
+        controller: dob,
+        readOnly: true,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.8),
+          labelText: "Date of Birth",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          prefixIcon: const Icon(Icons.calendar_today, color: Colors.blueAccent),
+          labelStyle: const TextStyle(color: Colors.blueGrey),
+        ),
+      ),
+    );
+  }
+
 
 }
