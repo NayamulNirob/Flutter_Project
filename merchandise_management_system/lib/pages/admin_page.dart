@@ -9,13 +9,134 @@ import 'countries_view_page.dart';
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: const Text('Admin Dashboard',style: TextStyle(color: Colors.white)),
+  //       automaticallyImplyLeading: false, // Hides the back button
+  //       backgroundColor: Colors.blueAccent,
+  //     ),
+  //     body: Padding(
+  //       padding: const EdgeInsets.all(16.0),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.stretch,
+  //         children: [
+  //           const Text(
+  //             'Welcome, Admin!',
+  //             style: TextStyle(
+  //               fontSize: 24,
+  //               fontWeight: FontWeight.bold,
+  //               color: Colors.blueAccent,
+  //             ),
+  //             textAlign: TextAlign.center,
+  //           ),
+  //           const SizedBox(height: 20),
+  //           ElevatedButton.icon(
+  //             icon: const Icon(Icons.people,color: Colors.white,),
+  //             label: const Text('View Users',style: TextStyle(color: Colors.white)),
+  //             onPressed: () {
+  //               // Navigate to users page or call an API to fetch users
+  //               print("View Users clicked");
+  //             },
+  //             style: ElevatedButton.styleFrom(
+  //               backgroundColor: Colors.blueAccent,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 10),
+  //           ElevatedButton.icon(
+  //             icon: const Icon(Icons.production_quantity_limits_rounded,color: Colors.white,),
+  //             label: const Text('Manage Products',style: TextStyle(color: Colors.white)),
+  //             onPressed: () {
+  //               // Navigate to manage hotels page or call an API to manage hotels
+  //               Navigator.push(
+  //                 context,
+  //                 MaterialPageRoute(builder: (context) => const AllProductViewPage()),
+  //               );
+  //               print("Manage Products clicked");
+  //             },
+  //             style: ElevatedButton.styleFrom(
+  //               backgroundColor: Colors.blueAccent,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 10),
+  //
+  //
+  //           ElevatedButton.icon(
+  //             icon: const Icon(Icons.add,color: Colors.white,),
+  //             label: const Text('Add Products',style: TextStyle(color: Colors.white)),
+  //             onPressed: () {
+  //               // Implement logout functionality or navigate back to login
+  //               Navigator.pushReplacement(
+  //                 context,
+  //                 MaterialPageRoute(builder: (context) => const AddProductPage()),
+  //               ); // Example logout: navigate back to login
+  //             },
+  //             style: ElevatedButton.styleFrom(
+  //               backgroundColor: Colors.blueAccent,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 10),
+  //
+  //
+  //           ElevatedButton.icon(
+  //             icon: const Icon(Icons.settings,color: Colors.white,),
+  //             label: const Text('Settings',style: TextStyle(color: Colors.white)),
+  //             onPressed: () {
+  //               // Navigate to settings page
+  //               print("Settings clicked");
+  //             },
+  //             style: ElevatedButton.styleFrom(
+  //               backgroundColor: Colors.blueAccent,
+  //             ),
+  //           ),
+  //
+  //           const SizedBox(
+  //             height: 20,
+  //           ),
+  //           ElevatedButton.icon(
+  //             icon: const Icon(Icons.map_outlined,color: Colors.white,),
+  //             label: const Text('Country View Page',style: TextStyle(color: Colors.white),),
+  //             onPressed: () {
+  //               Navigator.push(
+  //                 context,
+  //                 MaterialPageRoute(builder: (context) => const CountriesViewPage()),
+  //               );
+  //             },
+  //             style: ElevatedButton.styleFrom(
+  //               backgroundColor: Colors.blueAccent,
+  //             ),
+  //
+  //           ),
+  //           const SizedBox(height: 20),
+  //           ElevatedButton.icon(
+  //             icon: const Icon(Icons.logout,color: Colors.white,),
+  //             label: const Text('Logout',style: TextStyle(color: Colors.white),),
+  //
+  //             onPressed: () {
+  //               // Implement logout functionality or navigate back to login
+  //               Navigator.pushReplacement(
+  //                 context,
+  //                 MaterialPageRoute(builder: (context) => LoginPage()),
+  //               ); // Example logout: navigate back to login
+  //             },
+  //             style: ElevatedButton.styleFrom(
+  //               backgroundColor: Colors.purple,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Dashboard',style: TextStyle(color: Colors.white)),
+      appBar: AppBar(centerTitle: true,
+        title: const Text('Admin Dashboard', style: TextStyle(color: Colors.white)),
         automaticallyImplyLeading: false, // Hides the back button
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -25,103 +146,86 @@ class AdminPage extends StatelessWidget {
             const Text(
               'Welcome, Admin!',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.blueAccent,
+                color: Colors.deepPurple,
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.people,color: Colors.white,),
-              label: const Text('View Users',style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                // Navigate to users page or call an API to fetch users
-                print("View Users clicked");
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.production_quantity_limits_rounded,color: Colors.white,),
-              label: const Text('Manage Products',style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                // Navigate to manage hotels page or call an API to manage hotels
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AllProductViewPage()),
-                );
-                print("Manage Products clicked");
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-              ),
-            ),
-            const SizedBox(height: 10),
-
-
-            ElevatedButton.icon(
-              icon: const Icon(Icons.add,color: Colors.white,),
-              label: const Text('Add Products',style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                // Implement logout functionality or navigate back to login
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddProductPage()),
-                ); // Example logout: navigate back to login
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-              ),
-            ),
-            const SizedBox(height: 10),
-
-
-            ElevatedButton.icon(
-              icon: const Icon(Icons.settings,color: Colors.white,),
-              label: const Text('Settings',style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                // Navigate to settings page
-                print("Settings clicked");
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-              ),
-            ),
-
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.map_outlined,color: Colors.white,),
-              label: const Text('Country View Page',style: TextStyle(color: Colors.white),),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CountriesViewPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-              ),
-
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.logout,color: Colors.white,),
-              label: const Text('Logout',style: TextStyle(color: Colors.white),),
-
-              onPressed: () {
-                // Implement logout functionality or navigate back to login
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                ); // Example logout: navigate back to login
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple,
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: [
+                  _buildCard(
+                    context,
+                    color: Colors.cyanAccent,
+                    icon: Icons.people,
+                    label: 'View Users',
+                    onTap: () {
+                      print("View Users clicked");
+                    },
+                  ),
+                  _buildCard(
+                    context,
+                    color: Colors.cyanAccent,
+                    icon: Icons.production_quantity_limits_rounded,
+                    label: 'Manage Products',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AllProductViewPage()),
+                      );
+                    },
+                  ),
+                  _buildCard(
+                    context,
+                    color: Colors.greenAccent,
+                    icon: Icons.add,
+                    label: 'Add Products',
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AddProductPage()),
+                      );
+                    },
+                  ),
+                  _buildCard(
+                    context,
+                    color: Colors.greenAccent,
+                    icon: Icons.settings,
+                    label: 'Settings',
+                    onTap: () {
+                      print("Settings clicked");
+                    },
+                  ),
+                  _buildCard(
+                    context,
+                    color: Colors.greenAccent,
+                    icon: Icons.map_outlined,
+                    label: 'Country View Page',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CountriesViewPage()),
+                      );
+                    },
+                  ),
+                  _buildCard(
+                    context,
+                    color: Colors.red,
+                    icon: Icons.logout,
+                    label: 'Logout',
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ],
@@ -129,4 +233,43 @@ class AdminPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildCard(
+      BuildContext context, {
+        required Color color,
+        required IconData icon,
+        required String label,
+        required VoidCallback onTap,
+      }) {
+    return Card(
+      color: color.withOpacity(0.2),
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: color),
+              const SizedBox(height: 10),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
 }
