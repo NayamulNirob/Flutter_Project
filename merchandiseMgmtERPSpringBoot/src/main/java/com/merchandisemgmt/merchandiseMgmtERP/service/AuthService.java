@@ -68,19 +68,18 @@ public class AuthService {
     }
 
 
-    public AuthenticationResponse register(User user) throws IOException {
-//            , MultipartFile imageFile
+    public AuthenticationResponse register(User user, MultipartFile imageFile) throws IOException {
         // Check if the user already exists
         if (userRepository.findByEmail(user.getUsername()).isPresent()) {
             return new AuthenticationResponse(null, "User already exists", null);
         }
 
-//        if(imageFile != null && !imageFile.isEmpty()) {
-//
-//            String imageFileName = saveImage(imageFile);
-//
-//            user.setImage(imageFileName);
-//        }
+        if(imageFile != null && !imageFile.isEmpty()) {
+
+            String imageFileName = saveImage(imageFile);
+
+            user.setImage(imageFileName);
+        }
 
         // Create a new user entity and save it to the database
 

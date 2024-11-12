@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:merchandise_management_system/pages/RegistrationPage.dart';
+import 'package:merchandise_management_system/pages/LogInPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: RegistrationPage(),
+        home: Loginpage(),
     );
   }
 }

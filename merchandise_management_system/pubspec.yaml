@@ -41,8 +41,18 @@ dependencies:
   flutter_secure_storage: ^7.0.1
   jwt_decode: ^0.3.1
   shared_preferences: ^2.3.2
+  dio: ^5.7.0
+  image_picker: ^1.1.2
+  image_picker_web: ^4.0.0
+  path_provider: ^2.1.5
+  http_parser: ^4.0.2
+  mime: ^2.0.0
+  radio_group_v2: ^3.2.1
 
 
+
+  intl: any
+  google_fonts: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -53,7 +63,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  google_fonts: ^4.0.1
 
 
 # For information on the generic Dart part of this file, see the
