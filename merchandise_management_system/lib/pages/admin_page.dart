@@ -117,7 +117,7 @@ class AdminPage extends StatelessWidget {
                 // Implement logout functionality or navigate back to login
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Loginpage()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 ); // Example logout: navigate back to login
               },
               style: ElevatedButton.styleFrom(

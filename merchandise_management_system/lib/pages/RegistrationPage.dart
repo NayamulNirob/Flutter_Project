@@ -281,7 +281,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 if (isRegistered) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Loginpage()),
+                    MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 } else {
                   // Show an error message or handle unsuccessful registration as needed.
