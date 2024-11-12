@@ -27,15 +27,15 @@ class _AddProductPageState extends State<AddProductPage> {
 
 
   // Controllers for form fields
-  final TextEditingController _nameController = TextEditingController()..text='Women Floral Print Co-ord Set';
-  final TextEditingController _descriptionController = TextEditingController()..text='We introduce our self as a pioneer in the field of Womens Floral Print Co-ord Set. Elevate your look with our stunning 100% Viscose black floral print co-ord set.';
-  final TextEditingController _priceController = TextEditingController()..text='250';
-  final TextEditingController _quantityController = TextEditingController()..text='100';
-  final TextEditingController _taxController = TextEditingController()..text='10';
-  final TextEditingController _paidController = TextEditingController()..text='27500';
-  final TextEditingController _dueController = TextEditingController()..text='00000';
-  final TextEditingController _totalPriceController = TextEditingController()..text='27500';
-  final TextEditingController _sizesController = TextEditingController()..text='free';
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _taxController = TextEditingController();
+  final TextEditingController _paidController = TextEditingController();
+  final TextEditingController _dueController = TextEditingController();
+  final TextEditingController _totalPriceController = TextEditingController();
+  final TextEditingController _sizesController = TextEditingController();
 
   final DateTime _purchaseDate = DateTime.now();
   Supplier? _selectedSupplier;
@@ -198,81 +198,161 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add New Product')),
+      appBar: AppBar(
+        title: const Text('Add New Product'),
+        backgroundColor: Colors.deepOrangeAccent,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
+              // Product Name Field with Icon
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Product Name'),
+                decoration: InputDecoration(
+                  labelText: 'Product Name',
+                  prefixIcon: const Icon(Icons.label, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter product name' : null,
               ),
+              const SizedBox(height: 16),
+              // Description Field with Icon
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                  prefixIcon: const Icon(Icons.description, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter description' : null,
               ),
+              const SizedBox(height: 16),
+              // Price Field
               TextFormField(
                 controller: _priceController,
                 onChanged: (value) => _calculate(),
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Price'),
+                decoration: InputDecoration(
+                  labelText: 'Price',
+                  prefixIcon: const Icon(Icons.attach_money, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter price' : null,
               ),
+              const SizedBox(height: 16),
+              // Quantity Field
               TextFormField(
                 controller: _quantityController,
                 onChanged: (value) => _calculate(),
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Quantity'),
+                decoration: InputDecoration(
+                  labelText: 'Quantity',
+                  prefixIcon: const Icon(Icons.production_quantity_limits, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter quantity' : null,
               ),
+              const SizedBox(height: 16),
+              // Tax Field
               TextFormField(
                 controller: _taxController,
                 onChanged: (value) => _calculate(),
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Tax'),
+                decoration: InputDecoration(
+                  labelText: 'Tax',
+                  prefixIcon: const Icon(Icons.percent, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter tax amount' : null,
               ),
+              const SizedBox(height: 16),
+              // Paid Amount Field
               TextFormField(
                 controller: _paidController,
                 onChanged: (value) => _calculate(),
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Paid Amount'),
+                decoration: InputDecoration(
+                  labelText: 'Paid Amount',
+                  prefixIcon: const Icon(Icons.payments, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter paid amount' : null,
               ),
-
+              const SizedBox(height: 16),
+              // Due Amount Field
               TextFormField(
                 controller: _dueController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Due Amount'),
+                decoration: InputDecoration(
+                  labelText: 'Due Amount',
+                  prefixIcon: const Icon(Icons.money_off, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter due amount' : null,
               ),
+              const SizedBox(height: 16),
+              // Total Price Field
               TextFormField(
                 controller: _totalPriceController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Total Price'),
+                decoration: InputDecoration(
+                  labelText: 'Total Price',
+                  prefixIcon: const Icon(Icons.calculate, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter total price' : null,
               ),
+              const SizedBox(height: 16),
+              // Sizes Field
               TextFormField(
                 controller: _sizesController,
-                decoration: const InputDecoration(labelText: 'Sizes'),
+                decoration: InputDecoration(
+                  labelText: 'Sizes',
+                  prefixIcon: const Icon(Icons.format_size, color: Colors.deepOrange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) => value == null || value.isEmpty ? 'Enter available sizes' : null,
               ),
               const SizedBox(height: 16),
+              // Image Picker Button
               ElevatedButton.icon(
-                icon: const Icon(Icons.image),
+                icon: const Icon(Icons.image, color: Colors.white),
                 label: const Text('Pick Image'),
                 onPressed: pickImage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepOrangeAccent,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
               const SizedBox(height: 16),
+              // Supplier Dropdown
               DropdownButtonFormField<Supplier>(
                 value: _selectedSupplier,
                 hint: const Text('Select Supplier'),
@@ -287,8 +367,16 @@ class _AddProductPageState extends State<AddProductPage> {
                     child: Text(supplier.name),
                   );
                 }).toList(),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  contentPadding: const EdgeInsets.all(10),
+                ),
                 validator: (value) => value == null ? 'Please select a supplier' : null,
               ),
+              const SizedBox(height: 16),
+              // Sub-Category Dropdown
               DropdownButtonFormField<SubCategories>(
                 value: _selectedSubCategory,
                 hint: const Text('Select Sub-Category'),
@@ -303,11 +391,29 @@ class _AddProductPageState extends State<AddProductPage> {
                     child: Text(category.name),
                   );
                 }).toList(),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  contentPadding: const EdgeInsets.all(10),
+                ),
                 validator: (value) => value == null ? 'Please select a sub-category' : null,
               ),
+              const SizedBox(height: 24),
+              // Save Product Button
               ElevatedButton(
                 onPressed: _saveProduct,
-                child: const Text('Save Product'),
+                child: const Text(
+                  'Save Product',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
             ],
           ),
@@ -315,4 +421,6 @@ class _AddProductPageState extends State<AddProductPage> {
       ),
     );
   }
+
+
 }

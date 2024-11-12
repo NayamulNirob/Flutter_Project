@@ -4,7 +4,7 @@ class Country {
   final String? bussiness;
   final String? progress;
   final String? status;
-  final double sale;
+  final double? sale;
 
   Country({
     required this.id,
