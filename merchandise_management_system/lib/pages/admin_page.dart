@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
+import 'package:merchandise_management_system/pages/ProfileViewPage.dart';
+import 'package:merchandise_management_system/pages/SubCategoriesPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/pages/all_product_view_page.dart';
 
@@ -46,6 +48,10 @@ class AdminPage extends StatelessWidget {
                     icon: Icons.people,
                     label: 'View Users',
                     onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProfileViewPage()),
+                      );
                       print("View Users clicked");
                     },
                   ),
@@ -82,6 +88,19 @@ class AdminPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const AllProductcategoryView()),
+                      );
+                      print("Category clicked");
+                    },
+                  ),
+                  _buildCard(
+                    context,
+                    color: Colors.greenAccent,
+                    icon: Icons.category,
+                    label: 'Sub Category',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  SubCategoriesPage()),
                       );
                       print("Category clicked");
                     },
