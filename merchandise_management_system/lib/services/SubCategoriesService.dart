@@ -18,7 +18,7 @@ class SubCategoriesService {
     final response = await http.get(Uri.parse('$baseUrl/subcategories/'));
     print(response.statusCode);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 ||response.statusCode==201) {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((json) => SubCategories.fromJson(json)).toList();
     } else {
@@ -28,8 +28,9 @@ class SubCategoriesService {
 
   // Add a new subcategory
   Future<SubCategories> createSubCategory(SubCategories subCategory) async {
+
     final response = await http.post(
-      Uri.parse(baseUrl),
+      Uri.parse('$baseUrl/subcategories/save'),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(subCategory.toJson()),
     );

@@ -1,45 +1,52 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:merchandise_management_system/services/AuthService.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-import '../services/AuthService.dart';
+class UserViewPage extends StatefulWidget {
+  final int userId; // Pass the user ID to this page
 
-class ProfileViewPage extends StatefulWidget {
-  const ProfileViewPage({super.key});
+  UserViewPage({required this.userId});
+
   @override
-  _ProfileViewPageState createState() => _ProfileViewPageState();
+  _UserViewPageState createState() => _UserViewPageState();
 }
 
-class _ProfileViewPageState extends State<ProfileViewPage> {
+class _UserViewPageState extends State<UserViewPage> {
+  Map<String, dynamic>? user;
+  bool isLoading = true;
 
-  final _imagePicker = ImagePicker();
-  File? _profileImage;
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
 
-  final store = const FlutterSecureStorage();
-  AuthService authService = AuthService();
+  Future<void> fetchUserData() async {
+    try {
+      String? token = await AuthService().getToken();
+      if (token == null) throw Exception("No token found");
 
-  // Example user data
-  Map<String, dynamic> user = {
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "cell": "123-456-7890",
-    "address": "123 Main Street, Cityville",
-    "dob": "1990-01-01",
-    "gender": "Male",
-    "image": null, // Backend will provide the path to the image
-    "active": true,
-  };
+      final response = await http.get(
+        Uri.parse('http://localhost:8089/users/${widget.userId}'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
 
-  Future<void> _pickImage() async {
-    final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
+      if (response.statusCode == 200) {
+        setState(() {
+          user = jsonDecode(response.body);
+          isLoading = false;
+        });
+      } else {
+        throw Exception('Failed to fetch user data');
+      }
+    } catch (e) {
       setState(() {
-        _profileImage = File(pickedFile.path);
+        isLoading = false;
       });
-      // You would then upload the image to the server here
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
     }
   }
 
@@ -47,69 +54,44 @@ class _ProfileViewPageState extends State<ProfileViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
-        centerTitle: true,
+        title: Text('User Details'),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : user != null
+          ? Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              radius: 60,
-              backgroundImage: _profileImage != null
-                  ? FileImage(_profileImage!)
-                  : user['image'] != null
-                  ? NetworkImage(user['image']) as ImageProvider
-                  : AssetImage('assets/placeholder.png'),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: IconButton(
-                      icon: Icon(Icons.camera_alt, color: Colors.blue),
-                      onPressed: _pickImage,
-                    ),
-                  )
-                ],
-              ),
+              radius: 40,
+              backgroundImage: user!['image'] != null
+                  ? NetworkImage(
+                  'http://localhost:8089/uploads/${user!['image']}')
+                  : null,
+              child: user!['image'] == null
+                  ? Icon(Icons.person, size: 40)
+                  : null,
             ),
-            SizedBox(height: 16.0),
-            _buildProfileField("Name", user['name']),
-            _buildProfileField("Email", user['email']),
-            _buildProfileField("Phone", user['cell']),
-            _buildProfileField("Address", user['address']),
-            _buildProfileField("Date of Birth", user['dob']),
-            _buildProfileField("Gender", user['gender']),
-            _buildProfileField("Status", user['active'] ? "Active" : "Inactive"),
-            SizedBox(height: 20.0),
+            SizedBox(height: 20),
+            Text('Name: ${user!['name']}', style: TextStyle(fontSize: 18)),
+            Text('Email: ${user!['email']}', style: TextStyle(fontSize: 18)),
+            Text('Cell: ${user!['cell']}', style: TextStyle(fontSize: 18)),
+            Text('Address: ${user!['address']}', style: TextStyle(fontSize: 18)),
+            Text('DOB: ${user!['dob']}', style: TextStyle(fontSize: 18)),
+            Text('Gender: ${user!['gender']}', style: TextStyle(fontSize: 18)),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Handle user logout or edit
+                // Add functionality to edit user if needed
               },
-              child: Text('Edit Profile'),
+              child: Text('Edit'),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildProfileField(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          value,
-          style: TextStyle(fontSize: 16.0),
-        ),
-        Divider(),
-      ],
+      )
+          : Center(child: Text('User not found')),
     );
   }
 }

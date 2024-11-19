@@ -218,6 +218,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         },
                         child: const Text('Register', style: TextStyle(fontSize: 18)),
                       ),
+                      SizedBox(height: 20,),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginPage()),
+                          );
+                        },
+                        child: const Text(
+                          "Alredy have an account? Login here",
+                          style: TextStyle(
+                            color: Colors.cyan,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

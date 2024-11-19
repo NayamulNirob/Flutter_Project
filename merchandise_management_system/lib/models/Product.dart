@@ -6,7 +6,7 @@ import 'Supplier.dart';
 
 
 class Product {
-  final int? id;
+  final int id;
   final String name;
   final String description;
   final double price;

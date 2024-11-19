@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
-import 'package:merchandise_management_system/pages/ProfileViewPage.dart';
 import 'package:merchandise_management_system/pages/SubCategoriesPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/pages/all_product_view_page.dart';
@@ -48,10 +47,10 @@ class AdminPage extends StatelessWidget {
                     icon: Icons.people,
                     label: 'View Users',
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProfileViewPage()),
-                      );
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => UserViewPage(userId: 28,)),
+                      // );
                       print("View Users clicked");
                     },
                   ),
@@ -89,7 +88,6 @@ class AdminPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(builder: (context) => const AllProductcategoryView()),
                       );
-                      print("Category clicked");
                     },
                   ),
                   _buildCard(
@@ -102,7 +100,6 @@ class AdminPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(builder: (context) =>  SubCategoriesPage()),
                       );
-                      print("Category clicked");
                     },
                   ),
                   _buildCard(
@@ -161,7 +158,7 @@ class AdminPage extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
