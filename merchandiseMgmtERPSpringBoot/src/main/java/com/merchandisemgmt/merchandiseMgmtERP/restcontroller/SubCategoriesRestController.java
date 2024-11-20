@@ -38,7 +38,7 @@ public class SubCategoriesRestController {
     @DeleteMapping ("/delete/{id}")
     public ResponseEntity<String> deleteSubCategories(@PathVariable("id") long id) {
         subCategoriesService.deleteSubCategories(id);
-        return new ResponseEntity<>( "Supplier Deleted",HttpStatus.OK );
+        return new ResponseEntity<>( "Subcategories Deleted",HttpStatus.OK );
     }
     @GetMapping("/{id}")
     public ResponseEntity<SubCategories> getSubCategories(@PathVariable long id) {

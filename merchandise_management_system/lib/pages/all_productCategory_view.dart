@@ -30,7 +30,7 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
       ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.blueGrey[50],
       body: FutureBuilder<List<ProductCategory>>(
         future: futureProductsCategories,
         builder: (BuildContext context, AsyncSnapshot<List<ProductCategory>> snapshot) {
@@ -57,28 +57,41 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
                     );
                   },
                   child: Card(
-                    elevation: 5,
-                    margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                    elevation: 8,
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ClipRRect(
                           borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(25),
+                            top: Radius.circular(20),
                           ),
                           child: Image.network(
                             "http://localhost:8089/images/${category.image}",
                             width: double.infinity,
-                            height: 300,
+                            height: 220,
                             fit: BoxFit.cover,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                      (loadingProgress.expectedTotalBytes ?? 1)
+                                      : null,
+                                ),
+                              );
+                            },
                             errorBuilder: (context, error, stackTrace) {
-                              return Icon(
-                                Icons.fastfood,
-                                size: 80,
-                                color: Colors.grey[400],
+                              return Center(
+                                child: Icon(
+                                  Icons.image,
+                                  size: 80,
+                                  color: Colors.grey[400],
+                                ),
                               );
                             },
                           ),
@@ -91,7 +104,7 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
                               Text(
                                 category.name,
                                 style: const TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.deepOrange,
                                 ),
@@ -104,15 +117,22 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
                                   color: Colors.grey[700],
                                 ),
                               ),
-                              const SizedBox(height: 5),
-                              Text(
-                                'Category Code: ${category.categoryCode}',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  const Icon(Icons.code, color: Colors.green),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Category Code: ${category.categoryCode}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
                               ),
+                              const SizedBox(height: 16),
                             ],
                           ),
                         ),

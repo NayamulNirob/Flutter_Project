@@ -63,12 +63,33 @@ class _EditProductPageState extends State<EditProductPage> {
 
   Future<void> _loadSuppliersAndSubCategories() async {
     try {
+      // Fetch suppliers and subcategories
       final suppliers = await _productService.fetchSuppliers();
       final subCategories = await _productService.fetchSubCategories();
 
       setState(() {
         _suppliers = suppliers;
         _subCategories = subCategories;
+
+        // Validate _selectedSupplier and _selectedSubCategory
+        if (suppliers.isNotEmpty) {
+          _selectedSupplier = suppliers.firstWhere(
+                (supplier) => supplier.id == widget.product.supplier.id,
+            orElse: () => suppliers.first, // Default to first supplier
+          );
+        } else {
+          throw Exception('No suppliers available.');
+        }
+
+        if (subCategories.isNotEmpty) {
+          _selectedSubCategory = subCategories.firstWhere(
+                (subCategory) => subCategory.id == widget.product.subCategories.id,
+            orElse: () => subCategories.first, // Default to first subcategory
+          );
+        } else {
+          throw Exception('No subcategories available.');
+        }
+
         isLoading = false;
       });
     } catch (e) {
@@ -76,8 +97,15 @@ class _EditProductPageState extends State<EditProductPage> {
       setState(() {
         isLoading = false;
       });
+
+      // Handle the error case (e.g., show a dialog or snack bar)
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error loading data: ${e.toString()}')),
+      );
     }
   }
+
+
 
   Future<void> pickImage() async {
     final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
@@ -150,6 +178,7 @@ class _EditProductPageState extends State<EditProductPage> {
                 value == null || value.isEmpty ? 'Enter product name' : null,
               ),
               const SizedBox(height: 16),
+
               // Description Field
               TextFormField(
                 controller: _descriptionController,
@@ -161,8 +190,8 @@ class _EditProductPageState extends State<EditProductPage> {
                 value == null || value.isEmpty ? 'Enter description' : null,
               ),
               const SizedBox(height: 16),
-              // Other Fields (Price, Quantity, Tax, Paid, Due, etc.)
-              // Example: Price Field
+
+              // Price Field
               TextFormField(
                 controller: _priceController,
                 keyboardType: TextInputType.number,
@@ -174,17 +203,111 @@ class _EditProductPageState extends State<EditProductPage> {
                 value == null || value.isEmpty ? 'Enter product price' : null,
               ),
               const SizedBox(height: 16),
-              // Quantity
+
+              // Quantity Field
               TextFormField(
                 controller: _quantityController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   labelText: 'Quantity',
-                  prefixIcon: Icon(Icons.production_quantity_limits,
-                      color: Colors.deepOrange),
+                  prefixIcon:
+                  Icon(Icons.production_quantity_limits, color: Colors.deepOrange),
                 ),
                 validator: (value) =>
                 value == null || value.isEmpty ? 'Enter product quantity' : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Tax Field
+              TextFormField(
+                controller: _taxController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Tax',
+                  prefixIcon: Icon(Icons.percent, color: Colors.deepOrange),
+                ),
+                validator: (value) =>
+                value == null || value.isEmpty ? 'Enter tax percentage' : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Paid Field
+              TextFormField(
+                controller: _paidController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Paid Amount',
+                  prefixIcon: Icon(Icons.money, color: Colors.deepOrange),
+                ),
+                validator: (value) =>
+                value == null || value.isEmpty ? 'Enter paid amount' : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Due Field
+              TextFormField(
+                controller: _dueController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Due Amount',
+                  prefixIcon: Icon(Icons.attach_money_outlined, color: Colors.deepOrange),
+                ),
+                validator: (value) =>
+                value == null || value.isEmpty ? 'Enter due amount' : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Sizes Field
+              TextFormField(
+                controller: _sizesController,
+                decoration: const InputDecoration(
+                  labelText: 'Sizes',
+                  prefixIcon: Icon(Icons.view_list, color: Colors.deepOrange),
+                ),
+                validator: (value) =>
+                value == null || value.isEmpty ? 'Enter sizes' : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Supplier Dropdown
+              DropdownButtonFormField<Supplier>(
+                value: _selectedSupplier,
+                items: _suppliers
+                    .map((supplier) => DropdownMenuItem(
+                  value: supplier,
+                  child: Text(supplier.name),
+                ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedSupplier = value;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Supplier',
+                  prefixIcon: Icon(Icons.store, color: Colors.deepOrange),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Subcategory Dropdown
+              DropdownButtonFormField<SubCategories>(
+                value: _selectedSubCategory,
+                items: _subCategories
+                    .map((category) => DropdownMenuItem(
+                  value: category,
+                  child: Text(category.name),
+                ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedSubCategory = value;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Subcategory',
+                  prefixIcon: Icon(Icons.category, color: Colors.deepOrange),
+                ),
               ),
               const SizedBox(height: 16),
 
@@ -199,52 +322,7 @@ class _EditProductPageState extends State<EditProductPage> {
               ),
               const SizedBox(height: 16),
 
-              // // Supplier
-              // DropdownButtonFormField<Supplier>(
-              //   value: _selectedSupplier,
-              //   items: _suppliers
-              //       .map((supplier) => DropdownMenuItem(
-              //     value: supplier,
-              //     child: Text(supplier.name),
-              //   ))
-              //       .toList(),
-              //   onChanged: (value) {
-              //     setState(() {
-              //       _selectedSupplier = value;
-              //     });
-              //   },
-              //   decoration: const InputDecoration(
-              //     labelText: 'Supplier',
-              //     prefixIcon: Icon(Icons.store, color: Colors.deepOrange),
-              //   ),
-              // ),
-              // const SizedBox(height: 16),
-              //
-              //
-              // // Subcategory
-              // DropdownButtonFormField<SubCategories>(
-              //   value: _selectedSubCategory,
-              //   items: _subCategories
-              //       .map((category) => DropdownMenuItem(
-              //     value: category,
-              //     child: Text(category.name),
-              //   ))
-              //       .toList(),
-              //   onChanged: (value) {
-              //     setState(() {
-              //       _selectedSubCategory = value;
-              //     });
-              //   },
-              //   decoration: const InputDecoration(
-              //     labelText: 'Subcategory',
-              //     prefixIcon: Icon(Icons.category, color: Colors.deepOrange),
-              //   ),
-              // ),
-              // const SizedBox(height: 16),
-
-
-
-              // Save Button
+              // Update Button
               ElevatedButton(
                 onPressed: _updateProduct,
                 child: const Text('Update Product'),
