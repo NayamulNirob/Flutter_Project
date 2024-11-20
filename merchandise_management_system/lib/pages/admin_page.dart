@@ -96,10 +96,10 @@ class AdminPage extends StatelessWidget {
                     icon: Icons.category,
                     label: 'Sub Category',
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  SubCategoriesPage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) =>  SubCategoriesPage(category: ,)),
+                      // );
                     },
                   ),
                   _buildCard(
@@ -171,5 +171,5 @@ class AdminPage extends StatelessWidget {
       ),
     );
   }
-  
+
 }

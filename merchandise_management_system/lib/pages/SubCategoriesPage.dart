@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:merchandise_management_system/models/ProductCategory.dart';
 import 'package:merchandise_management_system/models/SubCategories.dart';
 import '../services/SubCategoriesService.dart';
 
 
 class SubCategoriesPage extends StatefulWidget {
+  final ProductCategory category;
+
+  const SubCategoriesPage({Key? key, required this.category}) : super(key: key);
+
   @override
   _SubCategoriesPageState createState() => _SubCategoriesPageState();
 }
@@ -58,7 +63,7 @@ class _SubCategoriesPageState extends State<SubCategoriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SubCategories"),
+        title: Text("Subcategories for ${widget.category.name}"),
         actions: [
           IconButton(
             icon: Icon(Icons.add),

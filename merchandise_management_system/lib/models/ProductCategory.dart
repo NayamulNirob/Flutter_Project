@@ -1,11 +1,14 @@
 import 'dart:math';
 
+import 'package:merchandise_management_system/models/SubCategories.dart';
+
 class ProductCategory {
   final int id;
   final String categoryCode;
   final String name;
   final String description;
   final String image;
+  final List<SubCategories> subCategories;
 
   static const String _characters = '0123ABCDEFG';
   static const int _codeLength = 4;
@@ -18,6 +21,7 @@ class ProductCategory {
     required this.name,
     required this.description,
     required this.image,
+    this.subCategories = const [],
   }) : categoryCode = categoryCode ?? _generateCategoryCode();
 
   // Generates a random category code
@@ -35,6 +39,7 @@ class ProductCategory {
     'name': name,
     'description': description,
     'image': image,
+    'subCategories': subCategories.map((subCat) => subCat.toJson()).toList(),
   };
 
   // Create ProductCategory from JSON
@@ -45,6 +50,10 @@ class ProductCategory {
       name: json['name'],
       description: json['description'],
       image: json['image'],
+      subCategories: (json['subCategories'] as List<dynamic>?)
+          ?.map((subCatJson) => SubCategories.fromJson(subCatJson))
+          .toList() ??
+          [],
     );
   }
 }

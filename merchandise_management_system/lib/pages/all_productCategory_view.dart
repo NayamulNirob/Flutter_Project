@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/ProductCategory.dart';
 import 'package:merchandise_management_system/services/ProductCategoryService.dart';
+import 'SubCategoriesPage.dart';
 
 class AllProductcategoryView extends StatefulWidget {
   const AllProductcategoryView({super.key});
@@ -11,14 +11,12 @@ class AllProductcategoryView extends StatefulWidget {
 }
 
 class _AllProductcategoryViewState extends State<AllProductcategoryView> {
-
-  late Future <List<ProductCategory>> futureProductsCategories;
+  late Future<List<ProductCategory>> futureProductsCategories;
 
   @override
   void initState() {
     super.initState();
-    futureProductsCategories =
-        ProductCategoryService().fetchProductCategories();
+    futureProductsCategories = ProductCategoryService().fetchProductCategories();
   }
 
   @override
@@ -27,7 +25,7 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
       appBar: AppBar(
         title: const Text(
           'All Available Categories',
-          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
@@ -48,75 +46,78 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final category = snapshot.data![index];
-                return Card(
-                  elevation: 5,
-                  margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Image with rounded corners and shadow
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(25),
-                        ),
-                        child: category.image != null
-                            ? Image.network(
-                          "http://localhost:8089/images/${category.image}",
-                          width: double.infinity,
-                          height: 300,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Icon(
-                              Icons.fastfood,
-                              size: 80,
-                              color: Colors.grey[400],
-                            );
-                          },
-                        )
-                            : Image.asset(
-                          'assets/placeholder.png',
-                          width: double.infinity,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
+                return GestureDetector(
+                  onTap: () {
+                    // Navigate to SubCategoriesPage with selected category
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SubCategoriesPage(category: category),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              category.name ?? 'Unnamed Category',
-                              style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.deepOrange,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              category.description ?? 'No category available',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey[700],
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Category Code: ${category.categoryCode ?? 'Unknown'}',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
+                    );
+                  },
+                  child: Card(
+                    elevation: 5,
+                    margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(25),
+                          ),
+                          child: Image.network(
+                            "http://localhost:8089/images/${category.image}",
+                            width: double.infinity,
+                            height: 300,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Icon(
+                                Icons.fastfood,
+                                size: 80,
+                                color: Colors.grey[400],
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                category.name,
+                                style: const TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.deepOrange,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                category.description,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                'Category Code: ${category.categoryCode}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -126,6 +127,4 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
       ),
     );
   }
-
-
 }

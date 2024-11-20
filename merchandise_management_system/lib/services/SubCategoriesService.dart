@@ -26,6 +26,16 @@ class SubCategoriesService {
     }
   }
 
+  Future<List<SubCategories>> fetchSubCategoriesByCategory(int categoryId) async {
+    final response = await http.get(Uri.parse('$baseUrl/subcategories?categoryId=$categoryId'));
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = jsonDecode(response.body);
+      return jsonData.map((json) => SubCategories.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load subcategories');
+    }
+  }
+
   // Add a new subcategory
   Future<SubCategories> createSubCategory(SubCategories subCategory) async {
 
