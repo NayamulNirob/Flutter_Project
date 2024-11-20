@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/Country.dart';
 import 'package:merchandise_management_system/pages/CountryEditPage.dart';
 import 'package:merchandise_management_system/services/CountryService.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CountriesViewPage extends StatefulWidget {
   const CountriesViewPage({super.key});
@@ -26,7 +27,6 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
   }
 
   void _editCountry(Country country) {
-    // Navigate to the edit page and pass the country data
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CountryEditPage(country: country)),
@@ -69,6 +69,17 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
     }
   }
 
+  // Function to prepare data for the chart
+  List<ChartData> _prepareChartData(List<Country> countries) {
+    return countries.map((country) {
+      return ChartData(
+        country.name ?? 'Unnamed Country',
+        country.sale ?? 0.0,
+        country.progress ?? 'Unidentitfied progress'  // Assuming sale is the data we want to visualize
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +102,9 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No business available'));
           } else {
+            // Prepare chart data
+            List<ChartData> chartData = _prepareChartData(snapshot.data!);
+
             return RefreshIndicator(
               onRefresh: _refreshCountries,
               child: ListView.builder(
@@ -135,16 +149,11 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
                                       );
                                       if (updatedCountry != null) {
                                         setState(() {
-                                          // Update the country list with the new details if returned
                                           futureCountries = CountryService().fetchCountries();
                                         });
                                       }
                                     },
                                   ),
-                                  // IconButton(
-                                  //   icon: const Icon(Icons.edit, color: Colors.blue),
-                                  //   onPressed: () => _editCountry(country),
-                                  // ),
                                   IconButton(
                                     icon: const Icon(Icons.delete, color: Colors.red),
                                     onPressed: () => _deleteCountry(country.id!),
@@ -182,6 +191,24 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
                                   color: Colors.indigo,
                                 ),
                               ),
+
+
+                              // Responsive Chart
+                              Expanded(
+                                child: Container(
+                                  height: 200, // Specify a fixed height or use MediaQuery for dynamic sizing
+                                  child: SfCartesianChart(
+                                    series: <CartesianSeries>[
+                                      BarSeries<ChartData, String>(
+                                        xValueMapper: (ChartData data, _) => data.countryName,
+                                        yValueMapper: (ChartData data, _) => data.sale,
+                                        color: Colors.blue,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
                               Text(
                                 'Status: \$${country.status}',
                                 style: const TextStyle(
@@ -206,5 +233,11 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
   }
 }
 
+// Model to hold chart data
+class ChartData {
+  final String countryName;
+  final double sale;
+  final String? progress;
 
-
+  ChartData(this.countryName, this.sale,this.progress);
+}
