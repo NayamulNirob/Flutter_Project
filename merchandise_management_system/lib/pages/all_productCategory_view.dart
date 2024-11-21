@@ -31,7 +31,7 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
         placeholderBuilder: (BuildContext context) => const Center(
           child: CircularProgressIndicator(),
         ),
-        
+
       );
     } else {
       return Image.network(
