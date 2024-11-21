@@ -23,41 +23,31 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
 
   Widget buildImage(String imageUrl) {
     if (imageUrl.endsWith('.svg')) {
-      // Use SvgPicture for SVG images
       return SvgPicture.network(
         imageUrl,
         width: double.infinity,
-        height: 220,
+        height: 200,
         fit: BoxFit.cover,
-        placeholderBuilder: (BuildContext context) => Center(
+        placeholderBuilder: (BuildContext context) => const Center(
           child: CircularProgressIndicator(),
-        )
+        ),
+        
       );
     } else {
-      // Use Image.network for JPG/PNG images
       return Image.network(
         imageUrl,
         width: double.infinity,
-        height: 220,
+        height: 200,
         fit: BoxFit.cover,
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
-          return Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      (loadingProgress.expectedTotalBytes ?? 1)
-                  : null,
-            ),
-          );
+          return const Center(child: CircularProgressIndicator());
         },
         errorBuilder: (context, error, stackTrace) {
-          return Center(
-            child: Icon(
-              Icons.image,
-              size: 80,
-              color: Colors.grey[400],
-            ),
+          return Container(
+            height: 200,
+            color: Colors.grey[300],
+            child: const Icon(Icons.broken_image, size: 80, color: Colors.grey),
           );
         },
       );
@@ -73,7 +63,8 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.indigo,
+        elevation: 6,
       ),
       backgroundColor: Colors.blueGrey[50],
       body: FutureBuilder<List<ProductCategory>>(
@@ -88,13 +79,12 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
             return const Center(child: Text('No Categories available'));
           } else {
             return ListView.builder(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final category = snapshot.data![index];
                 return GestureDetector(
                   onTap: () {
-                    // Navigate to SubCategoriesPage with selected category
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -106,19 +96,21 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
                   child: Card(
                     elevation: 8,
                     margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
+                        vertical: 10, horizontal: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
+                    shadowColor: Colors.black.withOpacity(0.2),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ClipRRect(
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(20),
-                            ),
-                            child: buildImage(
-                                "http://localhost:8089/api/image/${category.image}")),
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                          child: buildImage(
+                              "http://localhost:8089/api/image/${category.image}"),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
@@ -127,14 +119,16 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
                               Text(
                                 category.name,
                                 style: const TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.deepOrange,
+                                  color: Colors.indigo,
                                 ),
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 category.description,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey[700],
@@ -143,19 +137,18 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
                               const SizedBox(height: 12),
                               Row(
                                 children: [
-                                  const Icon(Icons.code, color: Colors.green),
+                                  const Icon(Icons.code, color: Colors.teal),
                                   const SizedBox(width: 8),
                                   Text(
-                                    'Category Code: ${category.categoryCode}',
+                                    'Code: ${category.categoryCode}',
                                     style: const TextStyle(
                                       fontSize: 16,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.w500,
+                                      color: Colors.teal,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 16),
                             ],
                           ),
                         ),
