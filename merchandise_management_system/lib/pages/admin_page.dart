@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
-import 'package:merchandise_management_system/pages/SubCategoriesPage.dart';
+import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/pages/all_product_view_page.dart';
 
@@ -45,13 +46,15 @@ class AdminPage extends StatelessWidget {
                     context,
                     color: Colors.cyanAccent,
                     icon: Icons.people,
-                    label: 'View Users',
+                    label: 'Suppliers ',
                     onTap: () {
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => UserViewPage(userId: 28,)),
-                      // );
-                      print("View Users clicked");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SupplierManagementPage()),
+                      );
+                      if (kDebugMode) {
+                        print("View Users clicked");
+                      }
                     },
                   ),
                   _buildCard(
