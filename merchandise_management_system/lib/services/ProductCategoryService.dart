@@ -23,7 +23,7 @@ class ProductCategoryService{
     if (response.statusCode==200 ||response.statusCode==201 ){
       List<dynamic>jsonData=jsonDecode(response.body);
       for(var json in jsonData){
-        print('Fetched product data: $json');
+        print(response.statusCode);
       }
       return jsonData.map((json)=>ProductCategory.fromJson(json)).toList();
     }else{

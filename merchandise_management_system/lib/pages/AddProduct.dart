@@ -7,6 +7,7 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'dart:typed_data';
 import 'package:merchandise_management_system/models/Product.dart';
 import 'package:merchandise_management_system/models/SubCategories.dart';
+import 'package:merchandise_management_system/pages/admin_page.dart';
 import 'package:merchandise_management_system/services/ProductService.dart';
 import '../models/Supplier.dart';
 import 'package:http/http.dart' as http;
@@ -204,6 +205,13 @@ class _AddProductPageState extends State<AddProductPage> {
       appBar: AppBar(
         title: const Text('Add New Product'),
         backgroundColor: Colors.deepOrangeAccent,
+        leading: IconButton(
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AdminPage()),
+              );
+            }, icon: Icon(Icons.arrow_back)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

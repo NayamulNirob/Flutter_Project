@@ -37,7 +37,6 @@ class AuthService{
 
   Future<String?> getUserRole() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('userRole'));
     return prefs.getString('userRole');
   }
 

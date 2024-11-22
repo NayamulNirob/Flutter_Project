@@ -4,6 +4,7 @@ import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
+import 'package:merchandise_management_system/pages/WarehouseMgmtPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/pages/all_product_view_page.dart';
 import 'package:merchandise_management_system/services/AuthService.dart';
@@ -31,11 +32,12 @@ class _AdminPageState extends State<AdminPage> {
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Admin Dashboard', style: TextStyle(color: Colors.white)),
+          title: const Text('Admin Dashboard',
+              style: TextStyle(color: Colors.white)),
           automaticallyImplyLeading: false, // Hides the back button
           backgroundColor: Colors.deepPurple,
         ),
-        body: Padding(
+        body:  Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -59,24 +61,13 @@ class _AdminPageState extends State<AdminPage> {
                     _buildCard(
                       context,
                       color: Colors.cyanAccent,
-                      icon: Icons.people,
-                      label: 'Suppliers',
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const SupplierManagementPage()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.cyanAccent,
                       icon: Icons.production_quantity_limits_rounded,
                       label: 'Manage Products',
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const AllProductViewPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const AllProductViewPage()),
                         );
                       },
                     ),
@@ -88,7 +79,8 @@ class _AdminPageState extends State<AdminPage> {
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const AddProductPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const AddProductPage()),
                         );
                       },
                     ),
@@ -100,7 +92,9 @@ class _AdminPageState extends State<AdminPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const AllProductcategoryView()),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const AllProductcategoryView()),
                         );
                       },
                     ),
@@ -112,7 +106,8 @@ class _AdminPageState extends State<AdminPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => CustomerManagementPage()),
+                          MaterialPageRoute(
+                              builder: (context) => CustomerManagementPage()),
                         );
                       },
                     ),
@@ -124,7 +119,35 @@ class _AdminPageState extends State<AdminPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const CountriesViewPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const CountriesViewPage()),
+                        );
+                      },
+                    ),
+                    _buildCard(
+                      context,
+                      color: Colors.greenAccent,
+                      icon: Icons.location_city,
+                      label: 'Warehouse Managemennt',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WarehouseMgmtPage()),
+                        );
+                      },
+                    ),
+                    _buildCard(
+                      context,
+                      color: Colors.cyanAccent,
+                      icon: Icons.people,
+                      label: 'Suppliers',
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const SupplierManagementPage()),
                         );
                       },
                     ),
@@ -152,10 +175,11 @@ class _AdminPageState extends State<AdminPage> {
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Phone Screen', style: TextStyle(color: Colors.white)),
+          title:
+          const Text('Phone Screen', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.deepPurple,
         ),
-        body: Center(
+        body: const Center(
           child: Text(
             'Phone Screen Placeholder',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

@@ -34,7 +34,7 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
       setState(() {
         _isLoading = false;
       });
-      _showErrorSnackBar('Failed to load customers.');
+      _showErrorSnackBar('Failed to load buyers.');
     }
   }
 
@@ -61,9 +61,9 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
     try {
       await _customerService.addCustomer(customer);
       _fetchCustomers();
-      _showSuccessSnackBar('Customer added successfully.');
+      _showSuccessSnackBar('Buyer added successfully.');
     } catch (e) {
-      _showErrorSnackBar('Failed to add customer.');
+      _showErrorSnackBar('Failed to add Buyer.');
     }
   }
 
@@ -71,9 +71,9 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
     try {
       await _customerService.updateCustomer(customer);
       _fetchCustomers();
-      _showSuccessSnackBar('Customer updated successfully.');
+      _showSuccessSnackBar('Buyer updated successfully.');
     } catch (e) {
-      _showErrorSnackBar('Failed to update customer.');
+      _showErrorSnackBar('Failed to update Buyer.');
     }
   }
 
@@ -81,9 +81,9 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
     try {
       await _customerService.deleteCustomer(id);
       _fetchCustomers();
-      _showSuccessSnackBar('Customer deleted successfully.');
+      _showSuccessSnackBar('Buyer deleted successfully.');
     } catch (e) {
-      _showErrorSnackBar('Failed to delete customer.');
+      _showErrorSnackBar('Failed to delete Buyer.');
     }
   }
 
@@ -102,7 +102,7 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Confirm Delete'),
-        content: Text('Are you sure you want to delete this customer?'),
+        content: Text('Are you sure you want to delete this buyer?'),
         actions: [
           TextButton(
             child: Text('Cancel'),
@@ -124,12 +124,12 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer Management'),
+        title: Text('Buyer Management'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddCustomerDialog,
         child: Icon(Icons.add,color: Colors.white,),
-        tooltip: 'Add Customer',
+        tooltip: 'Add Byuer',
         backgroundColor: Colors.green,
       ),
       body: _isLoading
