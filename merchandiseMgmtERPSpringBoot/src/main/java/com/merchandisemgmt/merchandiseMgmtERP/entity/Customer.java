@@ -41,9 +41,6 @@ public class Customer {
     private String contactPerson;
 
 
-    private String country;
-
-   
     private String organigation;
 
 

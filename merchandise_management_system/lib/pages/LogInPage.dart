@@ -15,27 +15,46 @@ class LoginPage extends StatelessWidget {
 
   LoginPage({super.key});
 
-  Future<void> loginUser (BuildContext context) async {
+  Future<void> loginUser(BuildContext context) async {
     try {
       final response = await authService.login(email.text, password.text);
       final role = await authService.getUserRole();
       print(role);
+
       if (role == 'ADMIN') {
+        // Show success message for login
+        _showSnackBar(context, 'Login Successful! Redirecting to Admin Page...', Colors.green);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const AdminPage()),
         );
       } else if (role == 'USER') {
+        // Show success message for login
+        _showSnackBar(context, 'Login Successful! Redirecting to User Page...', Colors.green);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const UserPage()),
         );
       } else {
-        print('Unknown role: $role');
+        // Show error message for unknown role
+        _showSnackBar(context, 'Unknown role Check password and user name: $role', Colors.red);
       }
     } catch (error) {
       print('Login failed: $error');
+      // Show error message for login failure
+      _showSnackBar(context, 'Login failed: $error', Colors.red);
     }
+  }
+
+  // Helper function to show SnackBar messages
+  void _showSnackBar(BuildContext context, String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: color,
+        duration: Duration(seconds: 3), // Duration for the SnackBar to stay visible
+      ),
+    );
   }
 
   @override
@@ -66,7 +85,7 @@ class LoginPage extends StatelessWidget {
                       letterSpacing: 1.2,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -111,7 +130,7 @@ class LoginPage extends StatelessWidget {
                     onPressed: () {
                       String em = email.text;
                       String pass = password.text;
-                      loginUser(context);
+                      loginUser(context); // Attempt login
                       print('Email: $em, Password: $pass');
                     },
                     style: ElevatedButton.styleFrom(
@@ -133,6 +152,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
@@ -185,5 +205,4 @@ class LoginPage extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
     );
   }
-
 }
