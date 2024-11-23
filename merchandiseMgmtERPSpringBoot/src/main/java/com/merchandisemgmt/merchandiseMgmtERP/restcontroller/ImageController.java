@@ -12,11 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Project: ConstructionAndRealEstateManagement-SpringBoot
- * Author: Shabab-1281539
- * Created on: 13/11/2024
- */
 
 @CrossOrigin("*")
 @RestController

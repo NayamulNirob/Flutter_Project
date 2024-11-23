@@ -41,17 +41,18 @@ class _UserProfileViewState extends State<UserProfileView> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Profile Image
+
             Center(
               child: CircleAvatar(
                 radius: 60,
-                backgroundImage: _currentUser!.image != null
-                    ? NetworkImage(_currentUser!.image!)
-                    : AssetImage('assets/default_avatar.png')
-                as ImageProvider,
+                backgroundImage: _currentUser?.image != null && _currentUser!.image!.isNotEmpty
+                    ? NetworkImage("http://localhost:8089/images/${_currentUser!.image!}")
+                    : AssetImage('assets/default_avatar.png') as ImageProvider,
+                onBackgroundImageError: (error, stackTrace) {
+                  debugPrint("Failed to load image: $error");
+                },
               ),
             ),
-            SizedBox(height: 20),
 
             // User Details
             _buildProfileField('Name', _currentUser!.name),

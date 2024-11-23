@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Merchandise Management System',
       routes: {
         '/login': (context) => LoginPage(),
-        '/profile': (context) => UserProfileView(),
+        // '/profile': (context) => UserProfileView(),
       },
       initialRoute: '/login',
       // Set the initial route to LoginPage
