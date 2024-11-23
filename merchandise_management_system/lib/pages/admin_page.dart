@@ -69,7 +69,7 @@ class _AdminPageState extends State<AdminPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'Welcome, Admin $userName!',
+                      'Welcome, Admin! $userName',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
