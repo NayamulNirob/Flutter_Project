@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decode/jwt_decode.dart';
+import 'package:merchandise_management_system/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService{
@@ -90,6 +91,7 @@ class AuthService{
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       String token = data['token'];
+      final user = data['user'];
 
       // Decode token to get role
       Map<String, dynamic> payload = Jwt.parseJwt(token);
@@ -99,11 +101,24 @@ class AuthService{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('authToken', token);
       await prefs.setString('userRole', role);
+      await prefs.setString('user', jsonEncode(user));
 
       return true;
     } else {
       print('Failed to log in: ${response.body}');
       return false;
+    }
+  }
+
+  Future<User?> getCurrentUser() async {
+    final sp = await SharedPreferences.getInstance();
+    final userJson = sp.getString('user');
+    print('Stored user JSON: $userJson');
+    if (userJson != null) {
+      User user = User.fromJson(jsonDecode(userJson));
+      return user;
+    } else {
+      return null;
     }
   }
 

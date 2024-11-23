@@ -4,6 +4,7 @@ import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
+import 'package:merchandise_management_system/pages/User_page.dart';
 import 'package:merchandise_management_system/pages/WarehouseMgmtPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/pages/all_product_view_page.dart';
@@ -19,13 +20,26 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
   int _selectedIndex = 0; // Tracks the selected bottom nav item
+  String userName = 'Admin'; // Fallback value until the user name is fetched
+  final AuthService authService = AuthService();
 
   // Create the screens only when the widget is built
   late final List<Widget> _screens;
 
+  // Fetch the current user's name from AuthService
+  Future<void> _fetchUserName() async {
+    final user = await authService.getCurrentUser();
+    print('User fetched successfully: ${user!.name}');
+    setState(() {
+      userName = user.name ?? 'Admin'; // Use 'Admin' as fallback
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    // Fetch the user name when the widget is initialized
+    _fetchUserName();
     // Initialize the screens list
     _screens = [
       // Admin Dashboard screen
@@ -37,138 +51,164 @@ class _AdminPageState extends State<AdminPage> {
           automaticallyImplyLeading: false, // Hides the back button
           backgroundColor: Colors.deepPurple,
         ),
-        body:  Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                'Welcome, Admin!',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
+        body: FutureBuilder<void>(
+          // Fetching user name asynchronously
+          future: _fetchUserName(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // Display a loading spinner while waiting for the user name
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              // Display error message if something went wrong
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              // Show the dashboard when the data is loaded
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    _buildCard(
-                      context,
-                      color: Colors.cyanAccent,
-                      icon: Icons.production_quantity_limits_rounded,
-                      label: 'Manage Products',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AllProductViewPage()),
-                        );
-                      },
+                    Text(
+                      'Welcome, Admin $userName!',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    _buildCard(
-                      context,
-                      color: Colors.greenAccent,
-                      icon: Icons.add,
-                      label: 'Add Products',
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AddProductPage()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.greenAccent,
-                      icon: Icons.category,
-                      label: 'Category',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                              const AllProductcategoryView()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.greenAccent,
-                      icon: Icons.shopping_cart,
-                      label: 'Buyers',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CustomerManagementPage()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.greenAccent,
-                      icon: Icons.map_outlined,
-                      label: 'Country View Page',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CountriesViewPage()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.greenAccent,
-                      icon: Icons.location_city,
-                      label: 'Warehouse Managemennt',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WarehouseMgmtPage()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.cyanAccent,
-                      icon: Icons.people,
-                      label: 'Suppliers',
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                              const SupplierManagementPage()),
-                        );
-                      },
-                    ),
-                    _buildCard(
-                      context,
-                      color: Colors.red,
-                      icon: Icons.logout,
-                      label: 'Logout',
-                      onTap: () async {
-                        await AuthService().logout();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                        );
-                      },
+                    const SizedBox(height: 20),
+                    Expanded(
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        children: [
+                          _buildCard(
+                            context,
+                            color: Colors.cyanAccent,
+                            icon: Icons.production_quantity_limits_rounded,
+                            label: 'Manage Products',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AllProductViewPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
+                            icon: Icons.add,
+                            label: 'Add Products',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AddProductPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
+                            icon: Icons.category,
+                            label: 'Category',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AllProductcategoryView()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
+                            icon: Icons.shopping_cart,
+                            label: 'Buyers',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CustomerManagementPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
+                            icon: Icons.map_outlined,
+                            label: 'Country View Page',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const CountriesViewPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
+                            icon: Icons.location_city,
+                            label: 'Warehouse Managemennt',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WarehouseMgmtPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.cyanAccent,
+                            icon: Icons.people,
+                            label: 'Suppliers',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SupplierManagementPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.red,
+                            icon: Icons.logout,
+                            label: 'Logout',
+                            onTap: () async {
+                              await AuthService().logout();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => LoginPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.red,
+                            icon: Icons.logout,
+                            label: 'Profile',
+                            onTap: () async {
+                              await AuthService().logout();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => UserPage()),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
+              );
+            }
+          },
         ),
       ),
       // Example screen for Phone button (you can replace it with any other page)
