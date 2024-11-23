@@ -4,6 +4,7 @@ import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
+import 'package:merchandise_management_system/pages/UserProfilePage.dart';
 import 'package:merchandise_management_system/pages/User_page.dart';
 import 'package:merchandise_management_system/pages/WarehouseMgmtPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
@@ -190,14 +191,14 @@ class _AdminPageState extends State<AdminPage> {
                           ),
                           _buildCard(
                             context,
-                            color: Colors.red,
-                            icon: Icons.logout,
+                            color: Colors.greenAccent,
+                            icon: Icons.person_pin_rounded,
                             label: 'Profile',
                             onTap: () async {
                               await AuthService().logout();
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => UserPage()),
+                                MaterialPageRoute(builder: (context) => UserProfileView()),
                               );
                             },
                           ),

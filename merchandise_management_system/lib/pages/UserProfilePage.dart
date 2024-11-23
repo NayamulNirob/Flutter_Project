@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/User.dart';
 import 'package:merchandise_management_system/services/AuthService.dart';
 
-class UserProfilePage extends StatefulWidget {
+class UserProfileView extends StatefulWidget {
   @override
-  _UserProfilePageState createState() => _UserProfilePageState();
+  _UserProfileViewState createState() => _UserProfileViewState();
 }
 
-class _UserProfilePageState extends State<UserProfilePage> {
+class _UserProfileViewState extends State<UserProfileView> {
   User? _currentUser;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadUserProfile();
+    _fetchCurrentUser();
   }
 
-  Future<void> _loadUserProfile() async {
+  Future<void> _fetchCurrentUser() async {
     AuthService authService = AuthService();
     User? user = await authService.getCurrentUser();
     setState(() {
@@ -36,67 +36,67 @@ class _UserProfilePageState extends State<UserProfilePage> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : _currentUser == null
-          ? Center(child: Text('No user data found'))
+          ? Center(child: Text('No user data available'))
           : Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
+            // Profile Image
             Center(
               child: CircleAvatar(
-                radius: 50,
+                radius: 60,
                 backgroundImage: _currentUser!.image != null
                     ? NetworkImage(_currentUser!.image!)
                     : AssetImage('assets/default_avatar.png')
                 as ImageProvider,
               ),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Name: ${_currentUser!.name ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Email: ${_currentUser!.email ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Phone: ${_currentUser!.cell ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Address: ${_currentUser!.address ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Date of Birth: ${_currentUser!.dob ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Gender: ${_currentUser!.gender ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Role: ${_currentUser!.role ?? "N/A"}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
+
+            // User Details
+            _buildProfileField('Name', _currentUser!.name),
+            _buildProfileField('Email', _currentUser!.email),
+            _buildProfileField('Phone', _currentUser!.cell),
+            _buildProfileField('Address', _currentUser!.address),
+            _buildProfileField('Date of Birth', _currentUser!.dob),
+            _buildProfileField('Gender', _currentUser!.gender),
+            _buildProfileField('Role', _currentUser!.role),
+            _buildProfileField('Username', _currentUser!.username),
+
+            SizedBox(height: 30),
+
+            // Logout Button
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 AuthService authService = AuthService();
-                authService.logout().then((_) {
-                  Navigator.of(context).pushReplacementNamed('/login');
-                });
+                await authService.logout();
+                Navigator.of(context).pushReplacementNamed('/login');
               },
               child: Text('Logout'),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildProfileField(String label, String? value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '$label: ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          Expanded(
+            child: Text(
+              value ?? 'N/A',
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ],
       ),
     );
   }
