@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/UserProfilePage.dart';
+import 'package:merchandise_management_system/pages/User_page.dart';
+import 'package:merchandise_management_system/pages/admin_page.dart'; // Assuming this exists
 
 void main() {
   runApp(const MyApp());
@@ -9,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,15 +18,17 @@ class MyApp extends StatelessWidget {
       title: 'Merchandise Management System',
       routes: {
         '/login': (context) => LoginPage(),
-        '/profile': (context) => UserProfileView(),
+        // '/profile': (context) => UserProfileView(), // Adjust the name if necessary
+        '/adminPage': (context) => AdminPage(),
+        '/userpage':(context)=>UserPage(),
       },
-      initialRoute: '/login',
-      // Set the initial route to LoginPage
+      initialRoute: '/login', // Start at the login page
+      home: LoginPage(),
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        // home: LoginPage(),
       ),
     );
   }
 }
+

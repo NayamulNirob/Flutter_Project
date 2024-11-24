@@ -113,7 +113,6 @@ class AuthService{
   Future<User?> getCurrentUser() async {
     final sp = await SharedPreferences.getInstance();
     final userJson = sp.getString('user');
-    print('Stored user JSON: $userJson');
     if (userJson != null) {
       User user = User.fromJson(jsonDecode(userJson));
       return user;

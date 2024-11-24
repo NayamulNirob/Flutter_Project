@@ -67,33 +67,6 @@ class _SubCategoriesPageState extends State<SubCategoriesPage> {
   }
 
 
-  // Future<void> _deleteSubCategory(int id) async {
-  //   bool confirm = await showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //       title: Text('Confirm Delete'),
-  //       content: Text('Are you sure you want to delete this subcategory?'),
-  //       actions: [
-  //         TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancel')),
-  //         TextButton(onPressed: () => Navigator.pop(context, true), child: Text('Delete')),
-  //       ],
-  //     ),
-  //   );
-  //
-  //   if (confirm) {
-  //     try {
-  //       await _service.deleteSubCategory(id);
-  //       setState(() {
-  //         _subCategories.removeWhere((element) => element.id == id);
-  //       });
-  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Subcategory deleted successfully.')));
-  //     } catch (e) {
-  //       print("Error deleting subcategory: $e");
-  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to delete subcategory.')));
-  //     }
-  //   }
-  // }
-
   Future<void> _deleteSubCategory(int id) async {
     bool confirm = await showDialog(
       context: context,

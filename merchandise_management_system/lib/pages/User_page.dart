@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:merchandise_management_system/pages/AllProductcategoryUserView.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/OrderItemPage.dart';
 import 'package:merchandise_management_system/pages/UserProfilePage.dart';
+import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/services/AuthService.dart';
 
 class UserPage extends StatefulWidget {
@@ -82,13 +84,26 @@ class _UserPageState extends State<UserPage> {
                           _buildCard(
                             context,
                             color: Colors.cyanAccent,
-                            icon: Icons.people,
-                            label: 'Suppliers',
+                            icon: Icons.shopping_cart,
+                            label: 'All Products',
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => OrderItemPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.cyanAccent,
+                            icon: Icons.category,
+                            label: 'Catagories',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AllProductcategoryUserView()),
                               );
                             },
                           ),

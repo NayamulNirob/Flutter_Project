@@ -67,24 +67,12 @@ class SubCategoriesService {
     }
   }
 
-  // Delete a subcategory
-  // Future<void> deleteSubCategory(int id) async {
-  //   final response = await http.delete(Uri.parse("$baseUrl/subcategories/delete/$id"));
-  //
-  //   if (response.statusCode != 200 || response.statusCode != 201) {
-  //     throw Exception("Failed to delete subcategory");
-  //   }
-  //   else{
-  //     throw("Subcategory Deleted Successfuly");
-  //   }
-  // }
 
 
   Future<bool> deleteSubCategory(int id) async {
     final response = await http.delete(Uri.parse("$baseUrl/subcategories/delete/$id"));
 
     print("Response status: ${response.statusCode}"); // Debugging line
-    print("Response body: ${response.body}"); // Debugging line
 
     if (response.statusCode == 200 || response.statusCode==201 || response.statusCode==204) {
       return true;  // Successfully deleted
