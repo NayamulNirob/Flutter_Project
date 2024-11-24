@@ -4,6 +4,7 @@ import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
+import 'package:merchandise_management_system/pages/TransactionPage.dart';
 import 'package:merchandise_management_system/pages/UserProfilePage.dart';
 import 'package:merchandise_management_system/pages/User_page.dart';
 import 'package:merchandise_management_system/pages/WarehouseMgmtPage.dart';
@@ -70,8 +71,8 @@ class _AdminPageState extends State<AdminPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'Welcome, Admin! $userName',
-                      style: TextStyle(
+                      'Welcome, $userName!',
+                      style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.deepPurple,
@@ -101,19 +102,6 @@ class _AdminPageState extends State<AdminPage> {
                           _buildCard(
                             context,
                             color: Colors.greenAccent,
-                            icon: Icons.add,
-                            label: 'Add Products',
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const AddProductPage()),
-                              );
-                            },
-                          ),
-                          _buildCard(
-                            context,
-                            color: Colors.greenAccent,
                             icon: Icons.category,
                             label: 'Category',
                             onTap: () {
@@ -127,6 +115,19 @@ class _AdminPageState extends State<AdminPage> {
                           _buildCard(
                             context,
                             color: Colors.greenAccent,
+                            icon: Icons.add,
+                            label: 'Add Products',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AddProductPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
                             icon: Icons.shopping_cart,
                             label: 'Buyers',
                             onTap: () {
@@ -134,6 +135,19 @@ class _AdminPageState extends State<AdminPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CustomerManagementPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
+                            icon: Icons.credit_card,
+                            label: 'Transaction',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TransactionPage()),
                               );
                             },
                           ),
@@ -178,19 +192,6 @@ class _AdminPageState extends State<AdminPage> {
                           ),
                           _buildCard(
                             context,
-                            color: Colors.red,
-                            icon: Icons.logout,
-                            label: 'Logout',
-                            onTap: () async {
-                              await AuthService().logout();
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => LoginPage()),
-                              );
-                            },
-                          ),
-                          _buildCard(
-                            context,
                             color: Colors.greenAccent,
                             icon: Icons.person_pin_rounded,
                             label: 'Profile',
@@ -199,6 +200,19 @@ class _AdminPageState extends State<AdminPage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) => UserProfileView()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.red,
+                            icon: Icons.logout,
+                            label: 'Logout',
+                            onTap: () async {
+                              await AuthService().logout();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => LoginPage()),
                               );
                             },
                           ),
@@ -250,16 +264,12 @@ class _AdminPageState extends State<AdminPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: 'Scan',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.search),
-          //   label: 'Search',
-          // ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: 'Phone',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code),
+            label: 'Scan',
           ),
         ],
       ),
