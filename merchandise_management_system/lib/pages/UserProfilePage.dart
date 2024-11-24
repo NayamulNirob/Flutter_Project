@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/User.dart';
-import 'package:merchandise_management_system/pages/admin_page.dart';
 import 'package:merchandise_management_system/services/AuthService.dart';
 
 class UserProfileView extends StatefulWidget {
+  final VoidCallback? onProfileClosed; // Optional callback function
+
+  UserProfileView({Key? key, this.onProfileClosed}) : super(key: key);
+
   @override
   _UserProfileViewState createState() => _UserProfileViewState();
 }
@@ -37,10 +40,9 @@ class _UserProfileViewState extends State<UserProfileView> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const AdminPage()),
-            );
+            // Trigger callback before popping
+            widget.onProfileClosed?.call();
+            Navigator.pop(context); // Go back to the previous page
           },
           icon: const Icon(Icons.arrow_back, color: Colors.white),
         ),
@@ -69,9 +71,13 @@ class _UserProfileViewState extends State<UserProfileView> {
             Center(
               child: CircleAvatar(
                 radius: 60,
-                backgroundImage: _currentUser?.image != null && _currentUser!.image!.isNotEmpty
-                    ? NetworkImage("http://localhost:8089/images/${_currentUser!.image!}")
-                    : const AssetImage('assets/default_avatar.png') as ImageProvider,
+                backgroundImage: _currentUser?.image != null &&
+                    _currentUser!.image!.isNotEmpty
+                    ? NetworkImage(
+                    "http://localhost:8089/images/${_currentUser!.image!}")
+                    : const AssetImage(
+                    'assets/default_avatar.png')
+                as ImageProvider,
                 onBackgroundImageError: (error, stackTrace) {
                   debugPrint("Failed to load image: $error");
                 },
@@ -93,18 +99,26 @@ class _UserProfileViewState extends State<UserProfileView> {
               child: ListView(
                 padding: const EdgeInsets.all(16.0),
                 children: [
-                  _buildProfileCard('Email', _currentUser?.email, Icons.email),
-                  _buildProfileCard('Phone', _currentUser?.cell, Icons.phone),
-                  _buildProfileCard('Address', _currentUser?.address, Icons.location_on),
-                  _buildProfileCard('Date of Birth', _currentUser?.dob, Icons.cake),
-                  _buildProfileCard('Gender', _currentUser?.gender, Icons.person),
-                  _buildProfileCard('Role', _currentUser?.role, Icons.work),
-                  _buildProfileCard('Username', _currentUser?.username, Icons.account_circle),
+                  _buildProfileCard('Email', _currentUser?.email,
+                      Icons.email),
+                  _buildProfileCard(
+                      'Phone', _currentUser?.cell, Icons.phone),
+                  _buildProfileCard(
+                      'Address', _currentUser?.address, Icons.location_on),
+                  _buildProfileCard(
+                      'Date of Birth', _currentUser?.dob, Icons.cake),
+                  _buildProfileCard(
+                      'Gender', _currentUser?.gender, Icons.person),
+                  _buildProfileCard(
+                      'Role', _currentUser?.role, Icons.work),
+                  _buildProfileCard('Username',
+                      _currentUser?.username, Icons.account_circle),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16, vertical: 20),
               child: ElevatedButton(
                 onPressed: () async {
                   AuthService authService = AuthService();
@@ -120,7 +134,8 @@ class _UserProfileViewState extends State<UserProfileView> {
                 ),
                 child: const Text(
                   'Logout',
-                  style: TextStyle(fontSize: 18,color: Colors.white),
+                  style:
+                  TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
             ),
@@ -176,123 +191,3 @@ class _UserProfileViewState extends State<UserProfileView> {
     );
   }
 }
-
-
-
-
-
-// import 'package:flutter/material.dart';
-//
-// import 'package:merchandise_management_system/models/User.dart';
-// import 'package:merchandise_management_system/pages/admin_page.dart';
-// import 'package:merchandise_management_system/services/AuthService.dart';
-//
-// class UserProfileView extends StatefulWidget {
-//   @override
-//   _UserProfileViewState createState() => _UserProfileViewState();
-// }
-//
-// class _UserProfileViewState extends State<UserProfileView> {
-//   User? _currentUser;
-//   bool _isLoading = true;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _fetchCurrentUser();
-//   }
-//
-//   Future<void> _fetchCurrentUser() async {
-//     AuthService authService = AuthService();
-//     User? user = await authService.getCurrentUser();
-//     setState(() {
-//       _currentUser = user;
-//       _isLoading = false;
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('User Profile'),
-//         backgroundColor: Colors.blueAccent,
-//         leading: IconButton(
-//           onPressed: () {
-//             Navigator.pushReplacement(
-//               context,
-//               MaterialPageRoute(builder: (context) => const AdminPage()),
-//             );// Ensure this matches the navigation stack
-//           },
-//           icon: const Icon(Icons.arrow_back),
-//         ),
-//       ),
-//       body: _isLoading
-//           ? Center(child: CircularProgressIndicator())
-//           : _currentUser == null
-//           ? Center(child: Text('No user data available'))
-//           : Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: ListView(
-//           children: [
-//
-//             Center(
-//               child: CircleAvatar(
-//                 radius: 60,
-//                 backgroundImage: _currentUser?.image != null && _currentUser!.image!.isNotEmpty
-//                     ? NetworkImage("http://localhost:8089/images/${_currentUser!.image!}")
-//                     : AssetImage('assets/default_avatar.png') as ImageProvider,
-//                 onBackgroundImageError: (error, stackTrace) {
-//                   debugPrint("Failed to load image: $error");
-//                 },
-//               ),
-//             ),
-//
-//             // User Details
-//             _buildProfileField('Name', _currentUser!.name),
-//             _buildProfileField('Email', _currentUser!.email),
-//             _buildProfileField('Phone', _currentUser!.cell),
-//             _buildProfileField('Address', _currentUser!.address),
-//             _buildProfileField('Date of Birth', _currentUser!.dob),
-//             _buildProfileField('Gender', _currentUser!.gender),
-//             _buildProfileField('Role', _currentUser!.role),
-//             _buildProfileField('Username', _currentUser!.username),
-//
-//             SizedBox(height: 30),
-//
-//             // Logout Button
-//             ElevatedButton(
-//               onPressed: () async {
-//                 AuthService authService = AuthService();
-//                 await authService.logout();
-//                 Navigator.of(context).pushReplacementNamed('/login');
-//               },
-//               child: Text('Logout'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-//
-//   Widget _buildProfileField(String label, String? value) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 8.0),
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             '$label: ',
-//             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-//           ),
-//           Expanded(
-//             child: Text(
-//               value ?? 'N/A',
-//               style: TextStyle(fontSize: 16),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
