@@ -6,8 +6,9 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
 
 ## 📸 Project Overview
 
-![Project Logo or Banner](https://via.placeholder.com/1200x400?text=Project+Banner)  
+
 *Replace the above placeholder with a banner or logo image.*
+![AdminDashbord](https://github.com/user-attachments/assets/62b6743e-eab2-4cc1-86d4-d2cee3b84a2c)
 
 ---
 
@@ -113,8 +114,6 @@ GitHub: @NayamulNirob
 
 markdown
 Copy code
-
-### Explanation:
 
 ### Explanation:
 - Added placeholders for **project banner**, **login screen**, **dashboard**, and **inventory management screen**.
