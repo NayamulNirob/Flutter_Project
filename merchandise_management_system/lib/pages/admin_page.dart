@@ -183,7 +183,7 @@ class _AdminPageState extends State<AdminPage> {
                             context,
                             color: Colors.greenAccent,
                             icon: Icons.location_city,
-                            label: 'Warehouse Managemennt',
+                            label: 'Warehouse Management',
                             onTap: () {
                               Navigator.push(
                                 context,

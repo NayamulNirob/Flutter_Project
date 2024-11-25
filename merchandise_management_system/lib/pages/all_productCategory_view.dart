@@ -60,7 +60,7 @@ class _AllProductcategoryViewState extends State<AllProductcategoryView> {
       appBar: AppBar(
         title: const Text(
           'All Available Categories',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: Colors.indigo,

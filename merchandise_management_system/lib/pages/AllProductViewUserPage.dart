@@ -187,9 +187,9 @@ class _AllProductViewUserPageState extends State<AllProductViewUserPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
-                        child: const Text('Order Now'),
+                        child: const Text('Order Now',style: TextStyle(color: Colors.white),),
                       ),
                     ],
                   ),
