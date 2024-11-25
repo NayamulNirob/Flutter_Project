@@ -7,7 +7,6 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
 ## 📸 Project Overview
 ![AdminDashbord](https://github.com/user-attachments/assets/62b6743e-eab2-4cc1-86d4-d2cee3b84a2c)
 ![AdminDashbord2](https://github.com/user-attachments/assets/e33f0996-ab5a-4abb-a226-d05d78d2bb19)
-![UserDashbordPage](https://github.com/user-attachments/assets/5609692d-8a26-4e53-b79b-ca8f7fc27533)
 ---
 
 ## 🚀 Features
