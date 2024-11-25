@@ -49,7 +49,7 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
   <tr>
     <td><img src="https://github.com/user-attachments/assets/ef25d550-42fe-4c39-9e4b-cfe84fb6aa91" alt="LogInPage" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/ad8ae5b4-913e-4efc-ae8a-8224991e0736" alt="AdminDashbord" width="300"/></td>
-    <td><img src="https://via.placeholder.com/600x400?text=Inventory+Management" alt="Inventory Management" width="300"/></td>
+    <td><img src="![AdminDashbord2](https://github.com/user-attachments/assets/c1649e7d-1e09-4c4b-9f71-2aa9b58aea7a)"alt="AdminDashbord 2" width="300"/></td>
   </tr>
 </table>
 
