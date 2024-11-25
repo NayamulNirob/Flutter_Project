@@ -40,12 +40,10 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
 ## 📱 Screenshots
 
 ### **1. Login Screen**  
-![Login Screen](https://via.placeholder.com/600x400?text=Login+Screen)  
-*Replace this placeholder with the actual Login screen image.*
+![LogInPage](https://github.com/user-attachments/assets/ef25d550-42fe-4c39-9e4b-cfe84fb6aa91)
 
 ### **2. Dashboard**  
-![Dashboard](https://via.placeholder.com/600x400?text=Dashboard)  
-*Replace this placeholder with the actual Dashboard image.*
+![AdminDashbord](https://github.com/user-attachments/assets/ad8ae5b4-913e-4efc-ae8a-8224991e0736)
 
 ### **3. Inventory Management**  
 ![Inventory Management](https://via.placeholder.com/600x400?text=Inventory+Management)  
