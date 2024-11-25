@@ -53,6 +53,10 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
     <td><img src="https://github.com/user-attachments/assets/c1649e7d-1e09-4c4b-9f71-2aa9b58aea7a" alt="AdminDashbord 2" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/9f6559d7-03f3-4a38-aac9-0621f8309086" alt="Registration Page" width="300"/></td>
   </tr>
+
+
+
+  
     <tr>
     <td align="center"><strong>User Dashbord</strong></td>
     <td align="center"><strong>All Products MgMt</strong></td>
