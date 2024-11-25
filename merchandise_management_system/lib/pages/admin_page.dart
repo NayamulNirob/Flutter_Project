@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
+import 'package:merchandise_management_system/pages/StockManagementPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
 import 'package:merchandise_management_system/pages/TransactionPage.dart';
 import 'package:merchandise_management_system/pages/UserProfilePage.dart';
@@ -187,6 +188,19 @@ class _AdminPageState extends State<AdminPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const SupplierManagementPage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.cyanAccent,
+                            icon: Icons.storage,
+                            label: 'Stock Management',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const StockManagementPage()),
                               );
                             },
                           ),
