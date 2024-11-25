@@ -46,8 +46,14 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
     <td align="center"><strong>Dashboard</strong></td>
     <td align="center"><strong>Dashbord 2nd Part</strong></td>
     <td align="center"><strong>Registration Page</strong></td>
-
   </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/ef25d550-42fe-4c39-9e4b-cfe84fb6aa91" alt="LogInPage" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/ad8ae5b4-913e-4efc-ae8a-8224991e0736" alt="AdminDashbord" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/c1649e7d-1e09-4c4b-9f71-2aa9b58aea7a" alt="AdminDashbord 2" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/9f6559d7-03f3-4a38-aac9-0621f8309086" alt="Registration Page" width="300"/></td>
+  </tr>
+
   <tr>
     <td><img src="https://github.com/user-attachments/assets/ef25d550-42fe-4c39-9e4b-cfe84fb6aa91" alt="LogInPage" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/ad8ae5b4-913e-4efc-ae8a-8224991e0736" alt="AdminDashbord" width="300"/></td>
