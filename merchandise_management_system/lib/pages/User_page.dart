@@ -38,27 +38,22 @@ class _UserPageState extends State<UserPage> {
     _fetchUserName();
     // Initialize the screens list
     _screens = [
-      // Admin Dashboard screen
+      // Dashboard screen
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('User Dashboard',
-              style: TextStyle(color: Colors.white)),
-          automaticallyImplyLeading: false, // Hides the back button
+          title: const Text('User Dashboard', style: TextStyle(color: Colors.white)),
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.deepPurple,
         ),
         body: FutureBuilder<void>(
-          // Fetching user name asynchronously
           future: _fetchUserName(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              // Display a loading spinner while waiting for the user name
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              // Display error message if something went wrong
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
-              // Show the dashboard when the data is loaded
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -80,7 +75,6 @@ class _UserPageState extends State<UserPage> {
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
                         children: [
-
                           _buildCard(
                             context,
                             color: Colors.cyanAccent,
@@ -89,8 +83,7 @@ class _UserPageState extends State<UserPage> {
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => OrderItemPage()),
+                                MaterialPageRoute(builder: (context) => OrderItemPage()),
                               );
                             },
                           ),
@@ -98,12 +91,11 @@ class _UserPageState extends State<UserPage> {
                             context,
                             color: Colors.cyanAccent,
                             icon: Icons.category,
-                            label: 'Catagories',
+                            label: 'Categories',
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => AllProductcategoryUserView()),
+                                MaterialPageRoute(builder: (context) => AllProductcategoryUserView()),
                               );
                             },
                           ),
@@ -143,12 +135,11 @@ class _UserPageState extends State<UserPage> {
           },
         ),
       ),
-      // Example screen for Phone button (you can replace it with any other page)
+      // Phone screen (second tab)
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title:
-          const Text('Phone Screen', style: TextStyle(color: Colors.white)),
+          title: const Text('Phone Screen', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.deepPurple,
         ),
         body: const Center(
@@ -158,10 +149,11 @@ class _UserPageState extends State<UserPage> {
           ),
         ),
       ),
+      // UserProfileView (for Settings tab)
+      UserProfileView(), // This is your third screen for the "Settings" tab
     ];
   }
 
-  // Method to handle bottom navigation item selection
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -173,8 +165,12 @@ class _UserPageState extends State<UserPage> {
     return Scaffold(
       body: _screens[_selectedIndex], // Display the corresponding screen
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex, // Set the current selected index
-        onTap: _onItemTapped, // Handle item taps
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -185,8 +181,8 @@ class _UserPageState extends State<UserPage> {
             label: 'Phone',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: 'Scan',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
@@ -229,6 +225,5 @@ class _UserPageState extends State<UserPage> {
       ),
     );
   }
-
-
 }
+

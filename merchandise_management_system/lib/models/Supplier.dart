@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 import 'Country.dart';
@@ -61,5 +62,6 @@ class Supplier {
       country: Country.fromJson(json['country']),
     );
   }
+
 
 }

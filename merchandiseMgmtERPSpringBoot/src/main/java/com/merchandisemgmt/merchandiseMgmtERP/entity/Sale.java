@@ -21,7 +21,6 @@ public class Sale {
     @JoinColumn(name = "product_id",nullable = false)
     private Product product;
 
-
     private long quantity;
     private long Price;
     private double totalPrice;
@@ -31,9 +30,5 @@ public class Sale {
     private Customer customer;
 
     private Date saleDate;
-
-
-
-
 
 }

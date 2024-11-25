@@ -13,16 +13,14 @@ class StockManagementPage extends StatefulWidget {
 class _StockManagementPageState extends State<StockManagementPage> {
   late Future<List<Stock>> _futureStocks;
   late TextEditingController _searchController;
-  late bool _isSearching;
-  late List<Stock> _filteredStocks;
+  bool _isSearching = false;
+  List<Stock> _filteredStocks = [];
 
   @override
   void initState() {
     super.initState();
     _futureStocks = StockService().getStocks();
     _searchController = TextEditingController();
-    _isSearching = false;
-    _filteredStocks = [];
   }
 
   Future<void> _reloadStocks() async {
@@ -47,15 +45,12 @@ class _StockManagementPageState extends State<StockManagementPage> {
 
   void _filterStocks(String query) {
     setState(() {
-      if (query.isEmpty) {
-        _filteredStocks = [];
-      } else {
-        _filteredStocks = _filteredStocks
-            .where((stock) =>
-        stock.product?.name.toLowerCase().contains(query.toLowerCase()) ??
-            false)
-            .toList();
-      }
+      _filteredStocks = query.isEmpty
+          ? []
+          : _filteredStocks
+          .where((stock) =>
+      stock.product?.name.toLowerCase().contains(query.toLowerCase()) ?? false)
+          .toList();
     });
   }
 
@@ -63,132 +58,80 @@ class _StockManagementPageState extends State<StockManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Stock Management'),
-        backgroundColor: Colors.deepOrange,
+        title: !_isSearching
+            ? const Text('Stock Management')
+            : TextField(
+          controller: _searchController,
+          autofocus: true,
+          onChanged: _filterStocks,
+          style: const TextStyle(color: Colors.white),
+          decoration: const InputDecoration(
+            hintText: 'Search...',
+            hintStyle: TextStyle(color: Colors.white70),
+            border: InputBorder.none,
+          ),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(_isSearching ? Icons.close : Icons.search),
             onPressed: () {
               setState(() {
                 _isSearching = !_isSearching;
+                if (!_isSearching) _searchController.clear();
               });
             },
           ),
         ],
+        backgroundColor: Colors.deepOrange,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            if (_isSearching)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: TextField(
-                  controller: _searchController,
-                  onChanged: _filterStocks,
-                  decoration: InputDecoration(
-                    labelText: 'Search by product name',
-                    border: OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.search),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
+      body: FutureBuilder<List<Stock>>(
+        future: _futureStocks,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No stocks available'));
+          }
+
+          final stocks = _isSearching ? _filteredStocks : snapshot.data!;
+
+          return ListView.builder(
+            itemCount: stocks.length,
+            itemBuilder: (context, index) {
+              final stock = stocks[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: ListTile(
+                  title: Text(stock.product?.name ?? 'N/A'),
+                  subtitle: Text('Warehouse: ${stock.wareHouse?.name ?? 'N/A'}'),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.orange),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditStockPage(stock: stock),
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () => _deleteStock(stock.id!),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            Expanded(
-              child: FutureBuilder<List<Stock>>(
-                future: _futureStocks,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No stocks available'));
-                  }
-
-                  final stocks = _isSearching ? _filteredStocks : snapshot.data!;
-
-                  return PaginatedDataTable(
-                    header: const Text(
-                      'Stock Overview',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    rowsPerPage: 10,
-                    columns: [
-                      DataColumn(label: Text('Product')),
-                      DataColumn(label: Text('Warehouse')),
-                      DataColumn(label: Text('Actions')),
-                    ],
-                    source: _StockDataSource(
-                      context: context,
-                      stocks: stocks,
-                      onEdit: (stock) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditStockPage(stock: stock),
-                          ),
-                        );
-                      },
-                      onDelete: _deleteStock,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+              );
+            },
+          );
+        },
       ),
     );
   }
 }
-
-
-
-class _StockDataSource extends DataTableSource {
-  final BuildContext context;
-  final List<Stock> stocks;
-  final Function(Stock) onEdit;
-  final Function(int) onDelete;
-
-  _StockDataSource({
-    required this.context,
-    required this.stocks,
-    required this.onEdit,
-    required this.onDelete,
-  });
-
-  @override
-  DataRow getRow(int index) {
-    final stock = stocks[index];
-    return DataRow(cells: [
-      DataCell(Text(stock.product?.name ?? 'N/A')),
-      DataCell(Text(stock.wareHouse?.name ?? 'N/A')),
-      DataCell(Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.edit, color: Colors.orange),
-            onPressed: () => onEdit(stock),
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete, color: Colors.red),
-            onPressed: () => onDelete(stock.id!),
-          ),
-        ],
-      )),
-    ]);
-  }
-
-  @override
-  int get rowCount => stocks.length;
-
-  @override
-  int get selectedRowCount => 0;
-
-  @override
-  bool get isRowCountApproximate => false; // Return false if row count is exact
-}
-

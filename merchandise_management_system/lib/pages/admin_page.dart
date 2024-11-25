@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
 import 'package:merchandise_management_system/pages/LogInPage.dart';
+import 'package:merchandise_management_system/pages/SaleManagementPage.dart';
 import 'package:merchandise_management_system/pages/StockManagementPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
 import 'package:merchandise_management_system/pages/TransactionPage.dart';
@@ -168,6 +169,19 @@ class _AdminPageState extends State<AdminPage> {
                           _buildCard(
                             context,
                             color: Colors.greenAccent,
+                            icon: Icons.schema_rounded,
+                            label: 'Sale Management',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SalePage()),
+                              );
+                            },
+                          ),
+                          _buildCard(
+                            context,
+                            color: Colors.greenAccent,
                             icon: Icons.location_city,
                             label: 'Warehouse Managemennt',
                             onTap: () {
@@ -255,6 +269,7 @@ class _AdminPageState extends State<AdminPage> {
           ),
         ),
       ),
+      UserProfileView(),
     ];
   }
 
@@ -270,8 +285,12 @@ class _AdminPageState extends State<AdminPage> {
     return Scaffold(
       body: _screens[_selectedIndex], // Display the corresponding screen
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex, // Set the current selected index
-        onTap: _onItemTapped, // Handle item taps
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -282,13 +301,14 @@ class _AdminPageState extends State<AdminPage> {
             label: 'Phone',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: 'Scan',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
     );
   }
+
 
   Widget _buildCard(
       BuildContext context, {
