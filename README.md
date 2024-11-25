@@ -54,16 +54,16 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
     <td><img src="https://github.com/user-attachments/assets/9f6559d7-03f3-4a38-aac9-0621f8309086" alt="Registration Page" width="300"/></td>
   </tr>
     <tr>
-    <td align="center"><strong>Login Screen</strong></td>
-    <td align="center"><strong>Dashboard</strong></td>
-    <td align="center"><strong>Dashbord 2nd Part</strong></td>
-    <td align="center"><strong>Registration Page</strong></td>
+    <td align="center"><strong>User Dashbord</strong></td>
+    <td align="center"><strong>All Products MgMt</strong></td>
+    <td align="center"><strong>All Products MgMt2</strong></td>
+    <td align="center"><strong>Add New Products</strong></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/ef25d550-42fe-4c39-9e4b-cfe84fb6aa91" alt="LogInPage" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ad8ae5b4-913e-4efc-ae8a-8224991e0736" alt="AdminDashbord" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/c1649e7d-1e09-4c4b-9f71-2aa9b58aea7a" alt="AdminDashbord 2" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/9f6559d7-03f3-4a38-aac9-0621f8309086" alt="Registration Page" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/4e408653-cfe5-47c1-801e-27a6f4067249" alt="user Dashbord" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/d09baae0-8d31-409e-b95c-434e788fb16d" alt="all products" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/eb66384b-4e2f-40ca-a062-3a4ed47b5569" alt="all propducts 2" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/092cc23d-821a-428f-b4f5-1df036507fea" alt="new products" width="300"/></td>
   </tr>
 </table>
 
