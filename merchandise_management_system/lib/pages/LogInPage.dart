@@ -7,8 +7,8 @@ import 'package:merchandise_management_system/pages/admin_page.dart';
 import 'package:merchandise_management_system/services/AuthService.dart';
 
 class LoginPage extends StatelessWidget {
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  final TextEditingController email = TextEditingController()..text='shabab@gmail.com';
+  final TextEditingController password = TextEditingController()..text='123456';
 
   final store = const FlutterSecureStorage();
   AuthService authService = AuthService();

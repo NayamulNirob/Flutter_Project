@@ -96,6 +96,19 @@ class _AllProductViewPageState extends State<AllProductViewPage> {
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddProductPage(),
+            ),
+          );
+        },
+        child: Icon(Icons.add,color: Colors.white,),
+        tooltip: 'Add New Product',
+        backgroundColor: Colors.green,
+      ),
       backgroundColor: Colors.grey[100],
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
@@ -303,24 +316,6 @@ class _AllProductViewPageState extends State<AllProductViewPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const AddProductPage(),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.add, color: Colors.white),
-                            label: const Text('Add New'),
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.white, backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                          ),
                           ElevatedButton.icon(
                             onPressed: () {
                               Navigator.push(

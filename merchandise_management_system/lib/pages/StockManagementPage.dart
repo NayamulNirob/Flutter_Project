@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/Stock.dart';
+import 'package:merchandise_management_system/pages/admin_page.dart';
 import 'package:merchandise_management_system/services/StockService.dart';
 import 'package:merchandise_management_system/pages/EditStockPage.dart';
 
@@ -71,18 +72,16 @@ class _StockManagementPageState extends State<StockManagementPage> {
             border: InputBorder.none,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(_isSearching ? Icons.close : Icons.search),
-            onPressed: () {
-              setState(() {
-                _isSearching = !_isSearching;
-                if (!_isSearching) _searchController.clear();
-              });
-            },
-          ),
-        ],
         backgroundColor: Colors.deepOrange,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const AdminPage()),
+            );// Ensure this matches the navigation stack
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: FutureBuilder<List<Stock>>(
         future: _futureStocks,

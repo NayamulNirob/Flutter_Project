@@ -79,7 +79,7 @@ class _UserPageState extends State<UserPage> {
                             context,
                             color: Colors.cyanAccent,
                             icon: Icons.shopping_cart,
-                            label: 'All Products',
+                            label: 'Order Products',
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,

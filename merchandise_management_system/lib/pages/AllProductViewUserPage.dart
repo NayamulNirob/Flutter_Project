@@ -237,7 +237,7 @@ class _OrderFormState extends State<OrderForm> {
           const SizedBox(height: 16),
           DropdownButtonFormField<Customer>(
             decoration: const InputDecoration(
-              labelText: 'Select Customer',
+              labelText: 'Select Supplier',
               border: OutlineInputBorder(),
             ),
             value: _selectedCustomer,
@@ -280,7 +280,7 @@ class _OrderFormState extends State<OrderForm> {
                   widget.onOrderPlaced();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Please select a customer')),
+                    const SnackBar(content: Text('Please select a Supplier')),
                   );
                 }
               },

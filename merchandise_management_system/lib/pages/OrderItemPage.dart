@@ -220,7 +220,7 @@ class _OrderFormState extends State<OrderForm> {
           const SizedBox(height: 16),
           DropdownButtonFormField<Customer>(
             decoration: InputDecoration(
-              labelText: 'Select Customer',
+              labelText: 'Select Supplier',
               border: OutlineInputBorder(),
             ),
             value: _selectedCustomer,
@@ -262,7 +262,7 @@ class _OrderFormState extends State<OrderForm> {
                 _selectedSize = newValue ?? _selectedSize;
               });
             },
-            items: ['S', 'M', 'L', 'XL', 'XXL', 'KG', 'GM']
+            items: ['S', 'M', 'L', 'XL', 'XXL', 'KG', 'GM','Ton','Container','Piece']
                 .map<DropdownMenuItem<String>>((String size) {
               return DropdownMenuItem<String>(
                 value: size,
