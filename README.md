@@ -118,6 +118,19 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
     <td><img src="https://github.com/user-attachments/assets/f5185d25-ad19-4aab-8b3b-4b229185c5f8" alt="all categories user" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/bdb50df8-0bc5-4112-b7de-73d54bb3e902" alt="new products" width="300"/></td>
   </tr>
+
+
+  <tr>
+    <td><img src="![Update Sales Management ](https://github.com/user-attachments/assets/7e8aab5a-e97a-4550-8380-351488616840)
+" alt="profile page" width="300"/></td>
+    <td><img src="![UserProfile Page](https://github.com/user-attachments/assets/7cd5b900-ab81-468c-9757-1f6798aa7661)
+" alt="all categories admin" width="300"/></td>
+    <td><img src="![Warehouse Management](https://github.com/user-attachments/assets/851f198b-0f4a-4843-8872-6a6601ec608e)
+" alt="all categories user" width="300"/></td>
+    <td><img src="![Products Order page](https://github.com/user-attachments/assets/7093ac1f-1171-42d5-bca9-fb53a8be221e)
+" alt="new products" width="300"/></td>
+  </tr>
+  
 </table>
 
 ---
