@@ -23,8 +23,9 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
 ## 🛠️ Tools & Technologies
 
 ### **Frontend**  
-- **Framework**: [Flutter](https://flutter.dev) (Dart)  
+- **Framework**: [Flutter](https://flutter.dev) (Dart)  ![download](https://github.com/user-attachments/assets/b23288e2-ef96-4dab-9782-bde58b1c099a)
 - **Features**: Responsive UI design  
+
 
 ### **Backend**  
 - **Framework**: [Spring Boot](https://spring.io/projects/spring-boot) (Java)  
