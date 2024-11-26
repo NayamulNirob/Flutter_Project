@@ -155,14 +155,6 @@ This project provides a RESTful API for managing authentication, inventory, orde
 
 ---
 
-## 🤝 Contributing  
-We welcome contributions! Here's how you can help:  
-1. Fork the repository.  
-2. Create a new branch for your feature or bug fix.  
-3. Submit a pull request with your changes.  
-
----
-
 ## 💬 Contact  
 
 Feel free to reach out with questions, suggestions, or feedback:  
