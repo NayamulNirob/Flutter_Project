@@ -105,6 +105,19 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
     <td><img src="https://github.com/user-attachments/assets/e09cfd58-c8e4-4b1d-8749-10fc38f799fe" alt="all categories user" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/d1737873-266b-4fef-9a82-26179d94d378" alt="new products" width="300"/></td>
   </tr>
+
+  <tr>
+    <td align="center"><strong>Sales Management</strong></td>
+    <td align="center"><strong>Stock Management</strong></td>
+    <td align="center"><strong>Supplier Management</strong></td>
+    <td align="center"><strong>Mans Accessories </strong></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/6d5c0dcc-ad4a-4534-81c8-35ea23fb7145" alt="profile page" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/029f9ff5-a74c-4fa8-8303-396a0f3e0649" alt="all categories admin" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/f5185d25-ad19-4aab-8b3b-4b229185c5f8" alt="all categories user" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/bdb50df8-0bc5-4112-b7de-73d54bb3e902" alt="new products" width="300"/></td>
+  </tr>
 </table>
 
 ---
