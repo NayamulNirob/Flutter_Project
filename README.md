@@ -66,6 +66,19 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
     <td><img src="https://github.com/user-attachments/assets/eb66384b-4e2f-40ca-a062-3a4ed47b5569" alt="all propducts 2" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/092cc23d-821a-428f-b4f5-1df036507fea" alt="new products" width="300"/></td>
   </tr>
+
+  <tr>
+    <td align="center"><strong>Admin Profile Page</strong></td>
+    <td align="center"><strong>All Available Categories Admin</strong></td>
+    <td align="center"><strong>All Available Categories User</strong></td>
+    <td align="center"><strong>Country View Page</strong></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/11402941-ec29-468b-a9e0-4caa3d049fe8" alt="profile page" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/5589f225-a852-45a2-8e00-16e55c392f36" alt="all categories admin" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/7b990ac3-9d1d-4fa7-a8cb-e02bb4aae5b7" alt="all categories user" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/c8048244-3ff2-4e02-a473-dc2260e05488" alt="new products" width="300"/></td>
+  </tr>
 </table>
 
 ---
