@@ -23,7 +23,7 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
 ## 🛠️ Tools & Technologies
 
 ### **Frontend**  
-- **Framework**: [Flutter](https://flutter.dev) (Dart) ![Repository Logo](path/to/repo-logo.png)
+- **Framework**: [Flutter](https://flutter.dev) (Dart)
 - **Features**: Responsive UI design  
 
 
@@ -132,66 +132,47 @@ A comprehensive, **cross-platform ERP system** for managing inventory, orders, a
 
 ---
 
-## 📂 Folder Structure
+# 📜 API Documentation  
 
-```plaintext
-merchandise-management-erp/
-├── frontend/          # Flutter application
-├── backend/           # Spring Boot application
-├── database/          # MySQL database schema and scripts
-└── README.md          # Project documentation
+This project provides a RESTful API for managing authentication, inventory, orders, and user roles.  
 
-🔧 Installation & Setup
-Prerequisites
-Flutter: Install from Flutter Dev.
-Java & Spring Boot: Install Java (JDK 11+) and set up Spring Boot.
-MySQL: Install and configure MySQL.
-Steps
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/NayamulNirob/Flutter_Project.git
-Navigate to the project folder:
-bash
-Copy code
-cd merchandise-management-erp
-Set up the backend:
-Navigate to the backend/ directory.
-Configure the application.properties file with your MySQL credentials.
-Run the Spring Boot application:
-bash
-Copy code
-./mvnw spring-boot:run
-Set up the frontend:
-Navigate to the frontend/ directory.
-Run the Flutter application:
-bash
-Copy code
-flutter run
-📜 API Documentation
-Base URL: http://localhost:8080/api/v1
-Endpoints:
-/auth/login – Authenticate users and retrieve a JWT token.
-/inventory – Manage inventory items.
-/orders – Manage order data.
-/users – Role-based user operations.
-🤝 Contributing
-We welcome contributions! Please fork the repository and create a pull request with your enhancements or bug fixes.
+## 🌐 Base URL  
+**Base URL:** `http://localhost:8089/api/ `  
 
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## 🛠️ Endpoints  
 
-💬 Contact
-Feel free to reach out for questions or suggestions:
-Developer: Nayamul Nirob
-GitHub: @NayamulNirob
+### 🔑 Authentication  
+- `/auth/login` – Authenticate users and retrieve a JWT token.  
 
-⭐ If you find this project helpful, please give it a star on GitHub!
+### 📦 Inventory  
+- `/inventory` – Manage inventory items.  
 
-markdown
-Copy code
+### 📋 Orders  
+- `/orders` – Manage order data.  
 
-### Explanation:
-- Added placeholders for **project banner**, **login screen**, **dashboard**, and **inventory management screen**.
-- Placeholder links (e.g., `https://via.placeholder.com`) can be replaced with real image URLs or uploaded files.
-- Images are used to break text blocks, making the `README.md` more visually appealing and user-friendly.
+### 👥 Users  
+- `/users` – Role-based user operations.  
+
+---
+
+## 🤝 Contributing  
+We welcome contributions! Here's how you can help:  
+1. Fork the repository.  
+2. Create a new branch for your feature or bug fix.  
+3. Submit a pull request with your changes.  
+
+---
+
+## 💬 Contact  
+
+Feel free to reach out with questions, suggestions, or feedback:  
+
+**Developer:** Nayamul Nirob  
+**GitHub:** [@NayamulNirob](https://github.com/NayamulNirob)  
+
+---
+
+⭐ **If you find this project helpful, please give it a star on GitHub!** ⭐  
+
+
+
