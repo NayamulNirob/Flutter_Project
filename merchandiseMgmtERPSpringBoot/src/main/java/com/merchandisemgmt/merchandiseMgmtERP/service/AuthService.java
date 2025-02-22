@@ -7,7 +7,6 @@ import com.merchandisemgmt.merchandiseMgmtERP.entity.User;
 import com.merchandisemgmt.merchandiseMgmtERP.jwt.JwtService;
 import com.merchandisemgmt.merchandiseMgmtERP.repository.TokenRepository;
 import com.merchandisemgmt.merchandiseMgmtERP.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -28,6 +27,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -59,9 +59,7 @@ public class AuthService {
         }
 
         // Set all valid tokens for the user to logged out
-        validTokens.forEach(t -> {
-            t.setLoggedOut(true);
-        });
+        validTokens.forEach(t -> t.setLoggedOut(true));
 
         // Save the changes to the tokens in the token repository
         tokenRepository.saveAll(validTokens);
@@ -101,31 +99,31 @@ public class AuthService {
     }
 
 
-    public AuthenticationResponse registerAdmin(User user) {
-
-        // Check if the user already exists
-        if (userRepository.findByEmail(user.getUsername()).isPresent()) {
-            return new AuthenticationResponse(null, "User already exists", null);
-        }
-
-        // Create a new user entity and save it to the database
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.valueOf("ADMIN"));
-        user.setLock(true);
-        user.setActive(false);
-
-        userRepository.save(user);
-
-        // Generate JWT token for the newly registered user
-        String jwt = jwtService.generateToken(user);
-
-        // Save the token to the token repository
-        saveUserToken(jwt, user);
-        sendActivationEmail(user);
-
-        return new AuthenticationResponse(jwt, "User registration was successful", null);
-    }
+//    public AuthenticationResponse registerAdmin(User user) {
+//
+//        // Check if the user already exists
+//        if (userRepository.findByEmail(user.getUsername()).isPresent()) {
+//            return new AuthenticationResponse(null, "User already exists", null);
+//        }
+//
+//        // Create a new user entity and save it to the database
+//
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setRole(Role.valueOf("ADMIN"));
+//        user.setLock(true);
+//        user.setActive(false);
+//
+//        userRepository.save(user);
+//
+//        // Generate JWT token for the newly registered user
+//        String jwt = jwtService.generateToken(user);
+//
+//        // Save the token to the token repository
+//        saveUserToken(jwt, user);
+//        sendActivationEmail(user);
+//
+//        return new AuthenticationResponse(jwt, "User registration was successful", null);
+//    }
 
 
     // Method to authenticate a user
@@ -204,7 +202,7 @@ public class AuthService {
             Files.createDirectories(uploadPath);
         }
 
-        String fileName = UUID.randomUUID() +"_"+file.getOriginalFilename().toString();
+        String fileName = UUID.randomUUID() +"_"+ file.getOriginalFilename();
         Path filePath = uploadPath.resolve(fileName);
 
 

@@ -25,12 +25,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(authService.register(user, imageFile));
     }
 
-    @PostMapping("/register/admin")
-    public ResponseEntity<AuthenticationResponse> registerAdmin(
-            @RequestBody User request
-    ) {
-        return ResponseEntity.ok(authService.registerAdmin(request));
-    }
+//    @PostMapping("/register/admin")
+//    public ResponseEntity<AuthenticationResponse> registerAdmin(
+//            @RequestBody User request
+//    ) {
+//        return ResponseEntity.ok(authService.registerAdmin(request));
+//    }
 
 
     @PostMapping("/login")
