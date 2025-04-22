@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/SubCategories.dart';
 import 'package:merchandise_management_system/services/SubCategoriesService.dart';
@@ -6,7 +5,7 @@ import 'package:merchandise_management_system/services/SubCategoriesService.dart
 class EditSubCategoryPage extends StatefulWidget {
   final SubCategories subCategory;
 
-  const EditSubCategoryPage({Key? key, required this.subCategory}) : super(key: key);
+  const EditSubCategoryPage({super.key, required this.subCategory});
 
   @override
   _EditSubCategoryPageState createState() => _EditSubCategoryPageState();

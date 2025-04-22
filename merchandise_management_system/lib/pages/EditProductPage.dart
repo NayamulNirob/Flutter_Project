@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
@@ -325,11 +324,11 @@ class _EditProductPageState extends State<EditProductPage> {
               // Update Button
               ElevatedButton(
                 onPressed: _updateProduct,
-                child: const Text('Update Product'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
+                child: const Text('Update Product'),
               ),
             ],
           ),

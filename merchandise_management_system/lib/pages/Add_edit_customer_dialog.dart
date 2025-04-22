@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:merchandise_management_system/models/Country.dart';
 import 'package:merchandise_management_system/models/Customer.dart';
 import 'package:merchandise_management_system/services/CountryService.dart';
 
@@ -7,8 +6,7 @@ class AddEditCustomerDialog extends StatefulWidget {
   final Customer? customer;
   final Function(Customer) onSave;
 
-  const AddEditCustomerDialog({Key? key, this.customer, required this.onSave})
-      : super(key: key);
+  const AddEditCustomerDialog({super.key, this.customer, required this.onSave});
 
   @override
   _AddEditCustomerDialogState createState() => _AddEditCustomerDialogState();

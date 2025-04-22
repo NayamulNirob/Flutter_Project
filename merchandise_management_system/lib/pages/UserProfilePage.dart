@@ -5,7 +5,7 @@ import 'package:merchandise_management_system/services/AuthService.dart';
 class UserProfileView extends StatefulWidget {
   final VoidCallback? onProfileClosed; // Optional callback function
 
-  UserProfileView({Key? key, this.onProfileClosed}) : super(key: key);
+  const UserProfileView({super.key, this.onProfileClosed});
 
   @override
   _UserProfileViewState createState() => _UserProfileViewState();

@@ -5,6 +5,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionPage extends StatefulWidget {
+  const TransactionPage({super.key});
+
   @override
   _TransactionPageState createState() => _TransactionPageState();
 }
@@ -148,7 +150,7 @@ class TransactionForm extends StatefulWidget {
   final Transaction? transaction;
   final Function(Transaction) onSave;
 
-  const TransactionForm({this.transaction, required this.onSave});
+  const TransactionForm({super.key, this.transaction, required this.onSave});
 
   @override
   _TransactionFormState createState() => _TransactionFormState();
@@ -255,7 +257,7 @@ class _TransactionFormState extends State<TransactionForm> {
 class TransactionPieChart extends StatelessWidget {
   final List<Transaction> transactions;
 
-  TransactionPieChart({required this.transactions});
+  const TransactionPieChart({super.key, required this.transactions});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:merchandise_management_system/models/ProductCategory.dart';
 class AddSubCategoryPage extends StatefulWidget {
   final ProductCategory category;
 
-  const AddSubCategoryPage({Key? key, required this.category}) : super(key: key);
+  const AddSubCategoryPage({super.key, required this.category});
 
   @override
   _AddSubCategoryPageState createState() => _AddSubCategoryPageState();

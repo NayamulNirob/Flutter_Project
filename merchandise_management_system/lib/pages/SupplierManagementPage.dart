@@ -50,7 +50,7 @@ class _SupplierManagementPageState extends State<SupplierManagementPage> {
     }
 
     final isEdit = supplier != null;
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     // Controllers for text fields
     final nameController = TextEditingController(text: supplier?.name ?? '');
@@ -79,7 +79,7 @@ class _SupplierManagementPageState extends State<SupplierManagementPage> {
           title: Text(isEdit ? 'Edit Supplier' : 'Add Supplier'),
           content: SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -163,7 +163,7 @@ class _SupplierManagementPageState extends State<SupplierManagementPage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
                   final newSupplier = Supplier(
                     id: supplier?.id ?? 0,
                     name: nameController.text,

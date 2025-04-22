@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/Customer.dart';
-import 'package:merchandise_management_system/models/OrderItem.dart';
 import 'package:merchandise_management_system/models/Product.dart';
 import 'package:merchandise_management_system/pages/User_page.dart';
 import 'package:merchandise_management_system/services/CustomerService.dart';
 import 'package:merchandise_management_system/services/ProductService.dart';
 
 class OrderItemPage extends StatefulWidget {
+  const OrderItemPage({super.key});
+
   @override
   _OrderItemPageState createState() => _OrderItemPageState();
 }
@@ -139,7 +140,7 @@ class _OrderItemPageState extends State<OrderItemPage> {
                             const SizedBox(height: 4),
                             // Product Price and Description
                             Text(
-                              '\$${product.price?.toStringAsFixed(2) ?? '0.00'}',
+                              '\$${product.price.toStringAsFixed(2) ?? '0.00'}',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.deepOrange,
@@ -160,10 +161,6 @@ class _OrderItemPageState extends State<OrderItemPage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () => _showOrderPopup(product),
-                          child: Text(
-                            'Order Now',
-                            style: TextStyle(color: Colors.white),
-                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.deepOrange,
                             padding: EdgeInsets.symmetric(vertical: 12),
@@ -173,6 +170,10 @@ class _OrderItemPageState extends State<OrderItemPage> {
                                 bottomRight: Radius.circular(12),
                               ),
                             ),
+                          ),
+                          child: Text(
+                            'Order Now',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -190,7 +191,7 @@ class OrderForm extends StatefulWidget {
   final List<Customer> customers;
   final VoidCallback onOrderPlaced;
 
-  OrderForm({
+  const OrderForm({super.key, 
     required this.product,
     required this.customers,
     required this.onOrderPlaced,
@@ -288,11 +289,11 @@ class _OrderFormState extends State<OrderForm> {
                   );
                 }
               },
-              child: Text('Confirm Order'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 padding: EdgeInsets.symmetric(vertical: 12),
               ),
+              child: Text('Confirm Order'),
             ),
           ),
         ],

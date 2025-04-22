@@ -38,23 +38,23 @@ class Customer {
     contactPerson = json['contactPerson'];
     organigation = json['organigation'];
     countryObj = json['countryObj'] != null
-        ? new CountryObj.fromJson(json['countryObj'])
+        ? CountryObj.fromJson(json['countryObj'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['phone'] = this.phone;
-    data['address'] = this.address;
-    data['createdAt'] = this.createdAt?.toIso8601String();
-    data['updatedAt'] = this.updatedAt?.toIso8601String();
-    data['contactPerson'] = this.contactPerson;
-    data['organigation'] = this.organigation;
-    if (this.countryObj != null) {
-      data['countryObj'] = this.countryObj!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['phone'] = phone;
+    data['address'] = address;
+    data['createdAt'] = createdAt?.toIso8601String();
+    data['updatedAt'] = updatedAt?.toIso8601String();
+    data['contactPerson'] = contactPerson;
+    data['organigation'] = organigation;
+    if (countryObj != null) {
+      data['countryObj'] = countryObj!.toJson();
     }
     return data;
   }
@@ -86,13 +86,13 @@ class CountryObj {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['bussiness'] = this.bussiness;
-    data['progress'] = this.progress;
-    data['status'] = this.status;
-    data['sale'] = this.sale;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['bussiness'] = bussiness;
+    data['progress'] = progress;
+    data['status'] = status;
+    data['sale'] = sale;
     return data;
   }
 

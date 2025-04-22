@@ -5,6 +5,8 @@ import 'package:merchandise_management_system/services/CustomerService.dart';
 import 'package:merchandise_management_system/pages/Add_edit_customer_dialog.dart';
 
 class CustomerManagementPage extends StatefulWidget {
+  const CustomerManagementPage({super.key});
+
   @override
   _CustomerManagementPageState createState() => _CustomerManagementPageState();
 }
@@ -128,9 +130,9 @@ class _CustomerManagementPageState extends State<CustomerManagementPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddCustomerDialog,
-        child: Icon(Icons.add,color: Colors.white,),
         tooltip: 'Add Byuer',
         backgroundColor: Colors.green,
+        child: Icon(Icons.add,color: Colors.white,),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())

@@ -5,7 +5,7 @@ import 'package:merchandise_management_system/services/StockService.dart';
 import 'package:merchandise_management_system/pages/EditStockPage.dart';
 
 class StockManagementPage extends StatefulWidget {
-  const StockManagementPage({Key? key}) : super(key: key);
+  const StockManagementPage({super.key});
 
   @override
   State<StockManagementPage> createState() => _StockManagementPageState();
@@ -14,7 +14,7 @@ class StockManagementPage extends StatefulWidget {
 class _StockManagementPageState extends State<StockManagementPage> {
   late Future<List<Stock>> _futureStocks;
   late TextEditingController _searchController;
-  bool _isSearching = false;
+  final bool _isSearching = false;
   List<Stock> _filteredStocks = [];
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:merchandise_management_system/models/Product.dart';
 import 'package:merchandise_management_system/models/SubCategories.dart';
 import 'package:merchandise_management_system/models/Customer.dart';
@@ -9,7 +8,7 @@ import 'package:merchandise_management_system/services/CustomerService.dart';
 class AllProductViewUserPage extends StatefulWidget {
   final SubCategories? subCategory;
 
-  const AllProductViewUserPage({Key? key, this.subCategory}) : super(key: key);
+  const AllProductViewUserPage({super.key, this.subCategory});
 
   @override
   State<AllProductViewUserPage> createState() => _AllProductViewUserPageState();
@@ -208,7 +207,7 @@ class OrderForm extends StatefulWidget {
   final List<Customer> customers;
   final VoidCallback onOrderPlaced;
 
-  const OrderForm({
+  const OrderForm({super.key, 
     required this.product,
     required this.customers,
     required this.onOrderPlaced,

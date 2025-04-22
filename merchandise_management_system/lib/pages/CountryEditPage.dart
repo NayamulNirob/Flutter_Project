@@ -5,7 +5,7 @@ import 'package:merchandise_management_system/services/CountryService.dart';
 class CountryEditPage extends StatefulWidget {
   final Country country;
 
-  const CountryEditPage({required this.country, Key? key}) : super(key: key);
+  const CountryEditPage({required this.country, super.key});
 
   @override
   _CountryEditPageState createState() => _CountryEditPageState();
@@ -42,7 +42,7 @@ class _CountryEditPageState extends State<CountryEditPage> {
         // Add other fields as necessary
       );
 
-      await CountryService().updateCountry(updatedCountry, updatedCountry.id!);
+      await CountryService().updateCountry(updatedCountry, updatedCountry.id);
       Navigator.pop(context, updatedCountry);
     }
   }

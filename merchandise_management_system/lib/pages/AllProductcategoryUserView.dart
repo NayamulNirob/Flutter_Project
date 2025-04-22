@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:merchandise_management_system/models/ProductCategory.dart';
 import 'package:merchandise_management_system/pages/SubCategoriesUserPage.dart';
 import 'package:merchandise_management_system/services/ProductCategoryService.dart';
-import 'SubCategoriesPage.dart';
 
 class AllProductcategoryUserView extends StatefulWidget {
   const AllProductcategoryUserView({super.key});

@@ -9,7 +9,7 @@ import 'package:merchandise_management_system/services/ProductService.dart';
 class AllProductViewPage extends StatefulWidget {
   final SubCategories? subCategory;
 
-  const AllProductViewPage({Key? key, this.subCategory}) : super(key: key);
+  const AllProductViewPage({super.key, this.subCategory});
 
   @override
   State<AllProductViewPage> createState() => _AllProductViewPageState();
@@ -105,9 +105,9 @@ class _AllProductViewPageState extends State<AllProductViewPage> {
             ),
           );
         },
-        child: Icon(Icons.add,color: Colors.white,),
         tooltip: 'Add New Product',
         backgroundColor: Colors.green,
+        child: Icon(Icons.add,color: Colors.white,),
       ),
       backgroundColor: Colors.grey[100],
       body: _isLoading

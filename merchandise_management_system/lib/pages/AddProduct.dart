@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_web/image_picker_web.dart';
-import 'dart:typed_data';
 import 'package:merchandise_management_system/models/Product.dart';
 import 'package:merchandise_management_system/models/SubCategories.dart';
 import 'package:merchandise_management_system/pages/admin_page.dart';
@@ -411,16 +410,16 @@ class _AddProductPageState extends State<AddProductPage> {
               // Save Product Button
               ElevatedButton(
                 onPressed: _saveProduct,
-                child: const Text(
-                  'Save Product',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
+                ),
+                child: const Text(
+                  'Save Product',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

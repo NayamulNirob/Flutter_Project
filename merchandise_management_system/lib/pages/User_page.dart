@@ -3,7 +3,6 @@ import 'package:merchandise_management_system/pages/AllProductcategoryUserView.d
 import 'package:merchandise_management_system/pages/LogInPage.dart';
 import 'package:merchandise_management_system/pages/OrderItemPage.dart';
 import 'package:merchandise_management_system/pages/UserProfilePage.dart';
-import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/services/AuthService.dart';
 
 class UserPage extends StatefulWidget {

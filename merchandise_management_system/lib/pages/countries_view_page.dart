@@ -156,7 +156,7 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.delete, color: Colors.red),
-                                    onPressed: () => _deleteCountry(country.id!),
+                                    onPressed: () => _deleteCountry(country.id),
                                   ),
                                 ],
                               ),
@@ -195,7 +195,7 @@ class _AllCountryViewPageState extends State<CountriesViewPage> {
 
                               // Responsive Chart
                               Expanded(
-                                child: Container(
+                                child: SizedBox(
                                   height: 200, // Specify a fixed height or use MediaQuery for dynamic sizing
                                   child: SfCartesianChart(
                                     series: <CartesianSeries>[

@@ -4,6 +4,8 @@ import 'package:merchandise_management_system/pages/Add_Edit_Warehouse_Dialog.da
 import 'package:merchandise_management_system/services/WareHouseService.dart';
 
 class WarehouseMgmtPage extends StatefulWidget {
+  const WarehouseMgmtPage({super.key});
+
   @override
   State<WarehouseMgmtPage> createState() => _WarehouseMgmtPageState();
 }

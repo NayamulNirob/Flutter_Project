@@ -5,7 +5,7 @@ import 'package:merchandise_management_system/services/StockService.dart';
 class EditStockPage extends StatefulWidget {
   final Stock stock;
 
-  const EditStockPage({Key? key, required this.stock}) : super(key: key);
+  const EditStockPage({super.key, required this.stock});
 
   @override
   State<EditStockPage> createState() => _EditStockPageState();

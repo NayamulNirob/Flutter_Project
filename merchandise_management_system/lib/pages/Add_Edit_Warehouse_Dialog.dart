@@ -6,8 +6,7 @@ class AddEditWarehouseDialog extends StatefulWidget {
   final WareHouse? warehouse;
   final Function (WareHouse) onSave;
 
-  const AddEditWarehouseDialog({Key? key, this.warehouse,required this.onSave})
-      : super(key: key);
+  const AddEditWarehouseDialog({super.key, this.warehouse,required this.onSave});
 
   @override
   State<AddEditWarehouseDialog> createState() => _AddEditWarehouseDialogState();

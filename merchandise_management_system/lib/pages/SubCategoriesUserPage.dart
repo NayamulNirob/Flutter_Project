@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/models/ProductCategory.dart';
 import 'package:merchandise_management_system/models/SubCategories.dart';
-import 'package:merchandise_management_system/pages/all_product_view_page.dart';
 import 'package:merchandise_management_system/pages/AllProductViewUserPage.dart';
 import '../services/SubCategoriesService.dart';
 
 class SubCategoriesUserPage extends StatefulWidget {
   final ProductCategory category;
 
-  const SubCategoriesUserPage({Key? key, required this.category}) : super(key: key);
+  const SubCategoriesUserPage({super.key, required this.category});
 
   @override
   _SubCategoriesUserPageState createState() => _SubCategoriesUserPageState();

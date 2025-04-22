@@ -3,6 +3,8 @@ import 'package:merchandise_management_system/models/Sale.dart';
 import 'package:merchandise_management_system/services/SaleService.dart';
 
 class SalePage extends StatefulWidget {
+  const SalePage({super.key});
+
   @override
   _SalePageState createState() => _SalePageState();
 }
@@ -232,7 +234,7 @@ class SaleForm extends StatefulWidget {
   final Sale? sale;
   final Function(Sale) onSave;
 
-  SaleForm({this.sale, required this.onSave});
+  const SaleForm({super.key, this.sale, required this.onSave});
 
   @override
   _SaleFormState createState() => _SaleFormState();

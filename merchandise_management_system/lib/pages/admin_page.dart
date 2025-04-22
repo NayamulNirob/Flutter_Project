@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:merchandise_management_system/pages/AddProduct.dart';
 import 'package:merchandise_management_system/pages/CustomerMgmtPage.dart';
@@ -8,7 +7,6 @@ import 'package:merchandise_management_system/pages/StockManagementPage.dart';
 import 'package:merchandise_management_system/pages/SupplierManagementPage.dart';
 import 'package:merchandise_management_system/pages/TransactionPage.dart';
 import 'package:merchandise_management_system/pages/UserProfilePage.dart';
-import 'package:merchandise_management_system/pages/User_page.dart';
 import 'package:merchandise_management_system/pages/WarehouseMgmtPage.dart';
 import 'package:merchandise_management_system/pages/all_productCategory_view.dart';
 import 'package:merchandise_management_system/pages/all_product_view_page.dart';

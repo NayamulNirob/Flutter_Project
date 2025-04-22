@@ -9,7 +9,7 @@ import '../services/SubCategoriesService.dart';
 class SubCategoriesPage extends StatefulWidget {
   final ProductCategory category;
 
-  const SubCategoriesPage({Key? key, required this.category}) : super(key: key);
+  const SubCategoriesPage({super.key, required this.category});
 
   @override
   _SubCategoriesPageState createState() => _SubCategoriesPageState();

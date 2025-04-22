@@ -25,10 +25,10 @@ class OrderItem {
   OrderItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     customer = json['customer'] != null
-        ? new Customer.fromJson(json['customer'])
+        ? Customer.fromJson(json['customer'])
         : null;
     product =
-    json['product'] != null ? new Product.fromJson(json['product']) : null;
+    json['product'] != null ? Product.fromJson(json['product']) : null;
     quantity = json['quantity'];
     status = json['status'];
     orderDate = json['orderDate'] != null
@@ -41,19 +41,19 @@ class OrderItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.customer != null) {
-      data['customer'] = this.customer!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (customer != null) {
+      data['customer'] = customer!.toJson();
     }
-    if (this.product != null) {
-      data['product'] = this.product!.toJson();
+    if (product != null) {
+      data['product'] = product!.toJson();
     }
-    data['quantity'] = this.quantity;
-    data['status'] = this.status;
-    data['orderDate'] = this.orderDate?.toIso8601String();
-    data['deliveryDate'] = this.deliveryDate?.toIso8601String();
-    data['totalPrice'] = this.totalPrice;
+    data['quantity'] = quantity;
+    data['status'] = status;
+    data['orderDate'] = orderDate?.toIso8601String();
+    data['deliveryDate'] = deliveryDate?.toIso8601String();
+    data['totalPrice'] = totalPrice;
     return data;
   }
 }
